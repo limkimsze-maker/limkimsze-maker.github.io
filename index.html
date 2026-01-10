@@ -6,374 +6,679 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lim Kim Sze — HTML Labs</title>
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;500;700&display=swap" rel="stylesheet">
+
   <style>
-    :root{--ink:#0f172a;--ink2:#334155;--bg:#f8fafc;--card:#fff;--accent:#0ea5e9}
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Lexend,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-    header{padding:32px 16px;text-align:center}
-    header h1{margin:0 0 6px;font-size:clamp(1.4rem,2.4vw,2.2rem)}
-    header p{margin:0;color:var(--ink2)}
-    .wrap{max-width:1100px;margin:0 auto;padding:16px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-    .card{background:var(--card);border-radius:18px;padding:16px;border:1px solid #e5e7eb;box-shadow:0 4px 12px rgba(0,0,0,.04)}
-    .card h3{margin:0 0 6px;font-size:1.05rem}
-    .card p{margin:0 0 10px;color:var(--ink2);font-size:.95rem}
-    .badges{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
-    .badge{font-size:.75rem;background:#e0f2fe;border:1px solid #bae6fd;color:#075985;padding:2px 8px;border-radius:999px}
-    .actions{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{display:inline-block;padding:8px 12px;border-radius:12px;border:1px solid #cbd5e1;text-decoration:none;color:var(--ink);background:white}
-    .btn.primary{background:var(--accent);border-color:var(--accent);color:white}
-    footer{max-width:1100px;margin:32px auto 24px;color:var(--ink2);font-size:.9rem;padding:0 16px}
-    .note{margin-top:2px;font-size:.85rem;color:#64748b}
+    :root{
+      --bg:#02060a;
+      --bg2:#030b10;
+      --ink:#d7ffe9;
+      --ink2:#8fffc8;
+
+      --grid:rgba(34, 255, 143, .10);
+      --neon:#22ff8f;
+      --neon2:#00e5ff;
+
+      --card:#071013cc;
+      --cardLine:rgba(34,255,143,.22);
+
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --radius:18px;
+
+      --btnBg:rgba(34,255,143,.12);
+      --btnLine:rgba(34,255,143,.55);
+
+      --yellow:#fde047;
+      --yellowLine:#f59e0b;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:Lexend,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(900px 600px at 15% 10%, rgba(34,255,143,.18), transparent 55%),
+        radial-gradient(900px 600px at 85% 15%, rgba(0,229,255,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      background-attachment: fixed;
+      overflow-x:hidden;
+    }
+
+    /* subtle “terminal grid” + vignette */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity:.35;
+      pointer-events:none;
+      mix-blend-mode:screen;
+    }
+    body::after{
+      content:"";
+      position:fixed; inset:-60px;
+      background:radial-gradient(closest-side, transparent 55%, rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+
+    header{
+      padding:34px 16px 16px;
+      text-align:center;
+      position:relative;
+    }
+    header h1{
+      margin:0 0 10px;
+      font-size:clamp(1.55rem, 2.6vw, 2.35rem);
+      letter-spacing:.6px;
+      text-shadow: 0 0 18px rgba(34,255,143,.25);
+    }
+    header p{margin:0;color:rgba(143,255,200,.85)}
+    .wrap{max-width:1150px;margin:0 auto;padding:14px 16px 28px}
+
+    /* “Matrix” code rain */
+    #rain{
+      position:fixed; inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:.55;
+      filter: blur(.2px);
+    }
+
+    /* top quick links */
+    .jump{
+      position:relative;
+      z-index:1;
+      display:flex; flex-wrap:wrap; gap:10px;
+      justify-content:center;
+      margin:14px auto 22px;
+      padding:10px;
+      max-width:980px;
+      background:rgba(3,12,16,.55);
+      border:1px solid rgba(34,255,143,.18);
+      border-radius:999px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      text-decoration:none;
+      color:var(--ink);
+      font-weight:800;
+      font-size:.9rem;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(34,255,143,.22);
+      background:rgba(34,255,143,.08);
+      transition:transform .1s ease, box-shadow .1s ease, filter .1s ease;
+      text-shadow: 0 0 14px rgba(34,255,143,.18);
+    }
+    .chip:hover{
+      transform:translateY(-1px);
+      box-shadow:0 18px 28px rgba(0,0,0,.40);
+      filter:saturate(1.12);
+    }
+    .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
+    .dot.math{background:linear-gradient(135deg, var(--neon), var(--neon2))}
+    .dot.sdr{background:linear-gradient(135deg, #22ff8f, #10b981)}
+    .dot.tool{background:linear-gradient(135deg, #a855f7, #22ff8f)}
+
+    .section{margin:22px 0 28px; position:relative; z-index:1}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      padding:14px 14px 12px;
+      border-radius:18px;
+      border:1px solid rgba(34,255,143,.20);
+      background:rgba(2,10,12,.62);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      margin-bottom:14px;
+    }
+    .section-title{
+      margin:0;
+      font-size:1.15rem;
+      display:flex; align-items:center; gap:10px;
+      text-shadow: 0 0 16px rgba(34,255,143,.20);
+    }
+    .section-sub{
+      margin:4px 0 0;
+      color:rgba(143,255,200,.85);
+      font-size:.92rem;
+      font-weight:500;
+    }
+    .section-tag{
+      font-size:.8rem;
+      font-weight:900;
+      color:rgba(143,255,200,.90);
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(34,255,143,.22);
+      background:rgba(34,255,143,.08);
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(265px,1fr));
+      gap:16px;
+    }
+
+    .card{
+      position:relative;
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:16px;
+      border:1px solid var(--cardLine);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      backdrop-filter: blur(10px);
+    }
+    .card:hover{
+      transform:translateY(-2px);
+      filter:saturate(1.08);
+      box-shadow: 0 26px 75px rgba(0,0,0,.60);
+    }
+
+    /* top neon scan bar */
+    .card::before{
+      content:"";
+      position:absolute; inset:0 0 auto 0;
+      height:6px;
+      background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(0,229,255,.75));
+    }
+    .card.sdr::before{background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(16,185,129,.75))}
+    .card.tool::before{background:linear-gradient(135deg, rgba(168,85,247,.85), rgba(34,255,143,.85))}
+
+    /* faint diagonal “code” lines */
+    .card::after{
+      content:"";
+      position:absolute; inset:-120px -80px auto auto;
+      width:320px; height:220px;
+      transform: rotate(18deg);
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(34,255,143,.10),
+          rgba(34,255,143,.10) 1px,
+          transparent 1px,
+          transparent 9px
+        );
+      opacity:.35;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      border-radius:18px;
+    }
+
+    .card h3{
+      margin:6px 0 6px;
+      font-size:1.03rem;
+      letter-spacing:.2px;
+    }
+    .card p{
+      margin:0 0 10px;
+      color:rgba(215,255,233,.82);
+      font-size:.95rem;
+      line-height:1.35;
+    }
+
+    .badges{display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 12px}
+    .badge{
+      font-size:.75rem;
+      font-weight:900;
+      padding:3px 10px;
+      border-radius:999px;
+      border:1px solid rgba(34,255,143,.18);
+      background:rgba(34,255,143,.06);
+      color:rgba(215,255,233,.92);
+      text-shadow: 0 0 10px rgba(34,255,143,.10);
+    }
+    .badge.math{border-color:rgba(0,229,255,.25); background:rgba(0,229,255,.08)}
+    .badge.sdr{border-color:rgba(16,185,129,.28); background:rgba(16,185,129,.08)}
+    .badge.tool{border-color:rgba(168,85,247,.30); background:rgba(168,85,247,.10)}
+    .badge.ready{border-color:rgba(253,224,71,.35); background:rgba(253,224,71,.08); color:#fff7cc}
+
+    .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 12px;
+      border-radius:14px;
+      border:1px solid var(--btnLine);
+      text-decoration:none;
+      color:var(--ink);
+      background:var(--btnBg);
+      font-weight:900;
+      font-size:.9rem;
+      transition:transform .08s ease, box-shadow .08s ease, filter .08s ease;
+      box-shadow: 0 14px 26px rgba(0,0,0,.35);
+    }
+    .btn:hover{transform:translateY(-1px); box-shadow:0 20px 34px rgba(0,0,0,.45); filter:saturate(1.12)}
+    .btn:active{transform:translateY(0)}
+    .btn.primary{
+      color:#02110a;
+      border-color:transparent;
+      background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(0,229,255,.65));
+      text-shadow:none;
+    }
+
     .pill-sls{
       display:inline-flex; align-items:center; gap:6px;
-      font-size:.78rem; font-weight:700;
+      font-size:.78rem; font-weight:1000;
       background:#fde047; /* prominent yellow */
       border:1px solid #f59e0b;
       color:#1f2937;
-      padding:6px 10px;
+      padding:7px 10px;
       border-radius:999px;
       text-decoration:none;
-      box-shadow:0 6px 14px rgba(245,158,11,.25);
+      box-shadow:0 18px 30px rgba(245,158,11,.20);
       transition:transform .08s ease, box-shadow .08s ease, filter .08s ease;
     }
-    .pill-sls:hover{transform:translateY(-1px); box-shadow:0 10px 18px rgba(245,158,11,.28); filter:saturate(1.05)}
+    .pill-sls:hover{transform:translateY(-1px); box-shadow:0 24px 34px rgba(245,158,11,.25); filter:saturate(1.05)}
     .pill-sls:active{transform:translateY(0)}
     .pill-sls:focus-visible{outline:3px solid rgba(245,158,11,.55); outline-offset:2px}
+
+    .note{
+      margin-top:10px;
+      font-size:.86rem;
+      color:rgba(143,255,200,.80);
+      line-height:1.35;
+    }
+
+    footer{
+      position:relative;
+      z-index:1;
+      max-width:1150px;
+      margin:30px auto 24px;
+      color:rgba(143,255,200,.85);
+      font-size:.92rem;
+      padding:0 16px;
+      text-align:center;
+      text-shadow: 0 0 14px rgba(34,255,143,.12);
+    }
+    footer a{color:inherit}
+    footer img{vertical-align:middle;margin-left:10px}
+
+    .anchor{scroll-margin-top:18px}
+
+    /* accessibility: respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      #rain{display:none}
+      .btn,.chip,.card{transition:none}
+    }
   </style>
+
   <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z848TQ1P2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6Z848TQ1P2');
-</script>
-<script src="https://cdn.counter.dev/script.js" data-id="825e93b6-ce99-40ef-8bcc-125f13297433" data-utcoffset="8"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z848TQ1P2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6Z848TQ1P2');
+  </script>
+  <script src="https://cdn.counter.dev/script.js" data-id="825e93b6-ce99-40ef-8bcc-125f13297433" data-utcoffset="8"></script>
 </head>
+
 <body>
+  <!-- Matrix code rain canvas -->
+  <canvas id="rain" aria-hidden="true"></canvas>
+
   <header>
-    <h1>Kim Sze — HTML Labs</h1>
+    <h1>Lim Kim Sze — HTML Labs</h1>
     <p>A gallery of my interactive teaching tools.</p>
-    <p> </p> 
+
+    <nav class="jump" aria-label="Jump to sections">
+      <a class="chip" href="#p2-math"><span class="dot math"></span> P2 Math</a>
+      <a class="chip" href="#p3-math"><span class="dot math"></span> P3 Math</a>
+      <a class="chip" href="#sdr"><span class="dot sdr"></span> SDR</a>
+      <a class="chip" href="#tools"><span class="dot tool"></span> General Tools</a>
+    </nav>
   </header>
+
   <main class="wrap">
-    <section class="grid">
-      <!-- Card 1 -->
-      <article class="card">
-        <h3>P3 Math Parallel & Perpendicular — Draw-Through-C</h3>
-        <p>Identify/draw lines through a point with instant feedback.</p>
-        <div class="badges"><span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Source</a>
+
+    <!-- ===================== P2 MATH ===================== -->
+    <section id="p2-math" class="section anchor">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title"><span class="dot math"></span> Primary 2 • Mathematics</h2>
+          <p class="section-sub">Fractions practice tools (fast feedback, kid-friendly).</p>
         </div>
+        <div class="section-tag">Sorted: Level → Subject</div>
+      </div>
+
+      <div class="grid">
+        <article class="card math">
+          <h3>P2 Write the Fractions</h3>
+          <p>Writing fractions with instant feedback.</p>
           <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/41198435-ed4d-4297-8ea8-791a78129de1" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note">This link is ready to embed in SLS.</div>
-      </article>
+            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4f0d0fee-b070-4546-bf69-877d7bb34571" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">This link is ready to embed in SLS.</div>
+        </article>
 
-      <!-- Duplicate this card block for each project -->
-       <!-- Card 2 -->
-      <article class="card">
-        <h3>P3 Math Time Duration</h3>
-        <p> Finding out Duration using Timeline with Instant Feedback.</p>
-        <div class="badges"><span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/bb54f554-c2d8-4237-bbf1-4ddf7a9ee5f3/section/97233706/activity/97233707" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note">This link is ready to embed in SLS.</div>
-      </article>
-
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 3 -->
-      <article class="card">
-        <h3>P2 Write the Fractions</h3>
-        <p> Writing Fractions with Instant Feedback.</p>
-        <div class="badges"><span class="badge">P2 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4f0d0fee-b070-4546-bf69-877d7bb34571" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-
-        <div class="note">This link is ready to embed in SLS.</div>
-      </article>
-
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 4 -->
-      <article class="card">
-        <h3> SDR Interactive Grid Chart </h3>
-        <p> SDR Interactive Grid Chart for students to learn Phonics on the Go! Good for Differentiated Instruction </p>
-        <div class="badges"><span class="badge">SDR</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789864?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note">This link is ready to embed in SLS.</div>
-      </article>
-
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 5 -->
-      <article class="card">
-        <h3> SDR Sound Garden </h3>
-        <p> SDR Sound Garden for Differentiated Instructions </p>
-        <div class="badges"><span class="badge">SDR</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Source</a>
-        </div>
+        <article class="card math">
+          <h3>P2 Comparing and Ordering Unit Fractions</h3>
+          <p>Compare and order unit fractions (randomised).</p>
           <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789865" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note">This link is ready to embed in SLS.</div>
-      </article>
+            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96517000" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">No score recorded in SLS. Pupils can retry freely.</div>
+        </article>
 
-      <!-- Duplicate this card block for each project -->
-       <!-- Card 6 -->
-      <article class="card">
-        <h3> P3 Addition and Subtraction Puzzles </h3>
-        <p> P3 Addition and Subtraction Puzzles. Teacher's Guide password is 0000. </p>
-        <div class="badges"><span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Source</a>
-        </div>
+        <article class="card math">
+          <h3>P2 Comparing and Ordering Like Fractions</h3>
+          <p>Compare and order like fractions (randomised).</p>
           <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4c1d41c5-4398-449b-81f3-e193550737e0/section/97233912/activity/97233913?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note"> Password to unlock Guide for Teachers is "0000". This activity can be found in Community Gallery. 1 mark is awarded after pupils corrected their mistake for motivation.</div>
-      </article>
+            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96516999?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">No score recorded in SLS. Pupils can retry freely.</div>
+        </article>
 
-      <!-- Duplicate this card block for each project -->
-       <!-- Card 7 -->
-      <article class="card">
-        <h3> P3 Comparing and Ordering Unlike Fractions </h3>
-        <p> P3 Comparing and Ordering Unlike Fractions </p>
-        <div class="badges"><span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/b4f9402a-96ce-41d4-a02e-cd8f07f8a944/section/97665230/activity/97665231" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note"> Pupils can only move on to Test after getting 12/12 for their Practice.</div>
-      </article>
+        <article class="card math">
+          <h3>P2 Adding Like Fractions</h3>
+          <p>Add like fractions (practice-friendly).</p>
+          <div class="badges">
+            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517001" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">No score recorded in SLS. Pupils can retry freely.</div>
+        </article>
 
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 8 -->
-      <article class="card">
-        <h3> P2 Comparing and Ordering Unit Fractions </h3>
-        <p> P2 Comparing and Ordering Unit Fractions </p>
-        <div class="badges"><span class="badge">P2 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96517000" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note"> Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-      </article>
-
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 9 -->
-      <article class="card">
-        <h3> P2 Comparing and Ordering Like Fractions </h3>
-        <p> P2 Comparing and Ordering Like Fractions </p>
-        <div class="badges"><span class="badge">P2 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96516999?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note"> Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-      </article>
-
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 9 -->
-      <article class="card">
-        <h3> Scorable HTML with Feedback Compiler  </h3>
-        <p> Scorable HTML with Feedback Compiler </p>
-        <div class="badges"><span class="badge">Teaching Resources and Productivity</span><span class="badge">General</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="note"> Teachers can create HTML5 with Practice + Test structure or Test Only structure. Easy zip by just pasting html and pressing a button!</div>
-      </article>
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 10 -->
-      <article class="card">
-        <h3> Teaching of Spelling for SDR 2.0, M-G-I, or Customise Your Own! </h3>
-        <p> Teaching of Spelling for SDR 2.0, M-G-I, or Customise Your Own! </p>
-        <div class="badges"><span class="badge">Teaching Resources and Productivity</span><span class="badge">General</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="PASTE_SLS_LESSON_URL_HERE" target="_blank" rel="noopener">Pending Submission to SLS</a>
-        </div>
-        <div class="note"> Teachers can teach SDR spelling by loading the pre-programmed words or customise their own spelling word lists. </div>
-      </article>
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 11 -->
-      <article class="card">
-        <h3> Place Value Chart for Counting - Good for all levels! </h3>
-        <p> Place Value Chart for Counting - Good for all levels! </p>
-        <div class="badges"><span class="badge">Teaching Resources and Productivity</span><span class="badge">General</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="PASTE_SLS_LESSON_URL_HERE" target="_blank" rel="noopener">Pending Submission to SLS</a>
-        </div>
-        <div class="note"> Teachers can use base ten blocks, place value discs and place value cards to show a number, up to 10 million!. </div>
-      </article>
-       <!-- Duplicate this card block for each project -->
-      <!-- Card 11 -->
-      <article class="card">
-        <h3> Place Value Chart for Counting - Good for all levels! </h3>
-        <p> Place Value Chart for Counting - Good for all levels! </p>
-        <div class="badges"><span class="badge">Teaching Resources and Productivity</span><span class="badge">General</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P1 to P6</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="PASTE_SLS_LESSON_URL_HERE" target="_blank" rel="noopener">Pending Submission to SLS</a>
-        </div>
-        <div class="note"> Teachers can use base ten blocks, place value discs and place value cards to show a number, up to 10 million!. </div>
-      </article>
-
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 12 -->
-      <article class="card">
-        <h3> P2 Adding Like Fractions </h3>
-        <p> P2 Adding Like Fractions </p>
-        <div class="badges"><span class="badge">P2 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P2 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517001" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note"> Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-      </article>
-      <!-- Duplicate this card block for each project -->
-      <!-- Card 13 -->
-      <article class="card">
-        <h3> P2 Subtracting Like Fractions </h3>
-        <p> P2 Subtracting Like Fractions </p>
-        <div class="badges"><span class="badge">P2 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P2 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517002" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note"> Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-      </article>
-      <!-- Card 14 -->
-      <article class="card">
-        <h3> P3 Measuring Volumes in Milliliters</h3>
-        <p> P3 Measuring Volumes in Milliliters </p>
-        <div class="badges"><span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span></div>
-        <div class="actions">
-          <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Open</a>
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Source</a>
-        </div>
-        <div class="badges">
-          <span class="badge">P3 Math</span><span class="badge">Primary</span><span class="badge">SLS-ready</span>
-          <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/a16b8ac4-52b9-4e85-93c5-a3c1ad412732/section/97233659/activity/97233660?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-        </div>
-        <div class="note"> Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-      </article>
+        <article class="card math">
+          <h3>P2 Subtracting Like Fractions</h3>
+          <p>Subtract like fractions (practice-friendly).</p>
+          <div class="badges">
+            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517002" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">No score recorded in SLS. Pupils can retry freely.</div>
+        </article>
+      </div>
     </section>
+
+    <!-- ===================== P3 MATH ===================== -->
+    <section id="p3-math" class="section anchor">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title"><span class="dot math"></span> Primary 3 • Mathematics</h2>
+          <p class="section-sub">Geometry, time, volume, and fraction reasoning.</p>
+        </div>
+        <div class="section-tag">Sorted: Level → Subject</div>
+      </div>
+
+      <div class="grid">
+        <article class="card math">
+          <h3>P3 Math Parallel &amp; Perpendicular — Draw-Through-C</h3>
+          <p>Identify/draw lines through a point with instant feedback.</p>
+          <div class="badges">
+            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/41198435-ed4d-4297-8ea8-791a78129de1" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">This link is ready to embed in SLS.</div>
+        </article>
+
+        <article class="card math">
+          <h3>P3 Math Time Duration</h3>
+          <p>Find duration using a timeline with instant feedback.</p>
+          <div class="badges">
+            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/bb54f554-c2d8-4237-bbf1-4ddf7a9ee5f3/section/97233706/activity/97233707" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">This link is ready to embed in SLS.</div>
+        </article>
+
+        <article class="card math">
+          <h3>P3 Addition and Subtraction Puzzles</h3>
+          <p>P3 Addition and Subtraction puzzles. Teacher’s Guide password is <b>0000</b>.</p>
+          <div class="badges">
+            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4c1d41c5-4398-449b-81f3-e193550737e0/section/97233912/activity/97233913?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">Password to unlock Guide for Teachers is “0000”. 1 mark awarded after pupils correct mistakes.</div>
+        </article>
+
+        <article class="card math">
+          <h3>P3 Comparing and Ordering Unlike Fractions</h3>
+          <p>Practice + test flow for comparing and ordering unlike fractions.</p>
+          <div class="badges">
+            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/b4f9402a-96ce-41d4-a02e-cd8f07f8a944/section/97665230/activity/97665231" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">Pupils can only move on to Test after getting 12/12 for their Practice.</div>
+        </article>
+
+        <article class="card math">
+          <h3>P3 Measuring Volumes in Milliliters</h3>
+          <p>Measure volumes in milliliters with guided practice.</p>
+          <div class="badges">
+            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/a16b8ac4-52b9-4e85-93c5-a3c1ad412732/section/97233659/activity/97233660?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">No score recorded in SLS. Pupils can retry freely.</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== SDR ===================== -->
+    <section id="sdr" class="section anchor">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title"><span class="dot sdr"></span> SDR • English (Phonics)</h2>
+          <p class="section-sub">Differentiated phonics tools for on-the-go practice.</p>
+        </div>
+        <div class="section-tag">Sorted: Level → Subject</div>
+      </div>
+
+      <div class="grid">
+        <article class="card sdr">
+          <h3>SDR Interactive Grid Chart</h3>
+          <p>Interactive grid chart for phonics learning on the go. Great for differentiated instruction.</p>
+          <div class="badges">
+            <span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789864?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">This link is ready to embed in SLS.</div>
+        </article>
+
+        <article class="card sdr">
+          <h3>SDR Sound Garden</h3>
+          <p>Sound Garden for differentiated instruction (phonics practice).</p>
+          <div class="badges">
+            <span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789865" target="_blank" rel="noopener">Link to SLS lesson</a>
+          </div>
+          <div class="note">This link is ready to embed in SLS.</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== GENERAL TOOLS ===================== -->
+    <section id="tools" class="section anchor">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title"><span class="dot tool"></span> General Tools • Teaching &amp; Productivity</h2>
+          <p class="section-sub">Utilities that support lesson prep, SLS packaging, and classroom demos.</p>
+        </div>
+        <div class="section-tag">Sorted: Level → Subject</div>
+      </div>
+
+      <div class="grid">
+        <article class="card tool">
+          <h3>Scorable HTML with Feedback Compiler</h3>
+          <p>Create scorable HTML (Practice+Test or Test-only). Easy ZIP: paste HTML and press a button.</p>
+          <div class="badges">
+            <span class="badge tool">Teaching Resources</span><span class="badge">General</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Source</a>
+          </div>
+          <div class="note">For teachers who want fast SLS-ready packaging and feedback payloads.</div>
+        </article>
+
+        <article class="card tool">
+          <h3>Teaching of Spelling for SDR 2.0 (M–G–I) — Or Customise Your Own!</h3>
+          <p>Teach SDR spelling using pre-programmed words or your own custom word lists.</p>
+          <div class="badges">
+            <span class="badge tool">Teaching Resources</span><span class="badge">General</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="PASTE_SLS_LESSON_URL_HERE" target="_blank" rel="noopener">Pending Submission to SLS</a>
+          </div>
+          <div class="note">Teachers can teach SDR spelling by loading the pre-programmed words or customise their own spelling word lists.</div>
+        </article>
+
+        <article class="card tool">
+          <h3>Place Value Chart for Counting — Good for all levels!</h3>
+          <p>Use base ten blocks, place value discs and place value cards to show numbers (up to 10 million).</p>
+          <div class="badges">
+            <span class="badge tool">Teaching Resources</span><span class="badge">P1 to P6</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Open</a>
+            <a class="btn" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Source</a>
+            <a class="pill-sls" href="PASTE_SLS_LESSON_URL_HERE" target="_blank" rel="noopener">Pending Submission to SLS</a>
+          </div>
+          <div class="note">Great for whole-class demo, small group, or 1–1 intervention.</div>
+        </article>
+      </div>
+    </section>
+
   </main>
 
-  <footer>© 2025 Lim Kim Sze • CC BY-NC-ND 4.0 • Gallery is SLS-embed friendly.
-  <a href="https://hits.sh/limkimsze-maker.github.io/">
-  <img alt="Hits"
-       src="https://hits.sh/limkimsze-maker.github.io.svg?style=for-the-badge&label=Views&color=007ec6" />
-  </a>
+  <footer>
+    Designed by Lim Kim Sze © 2025 • CC BY-NC-ND 4.0 • Gallery is SLS-embed friendly.
+    <a href="https://hits.sh/limkimsze-maker.github.io/">
+      <img alt="Hits" src="https://hits.sh/limkimsze-maker.github.io.svg?style=for-the-badge&label=Views&color=007ec6" />
+    </a>
   </footer>
+
+  <script>
+    // Matrix-style code rain (lightweight, no libraries)
+    (function(){
+      const c = document.getElementById('rain');
+      const ctx = c.getContext('2d', { alpha:true });
+
+      const prefersReduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduce) { c.style.display='none'; return; }
+
+      const glyphs = ("アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン" +
+                      "0123456789" +
+                      "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                      "abcdefghijklmnopqrstuvwxyz").split("");
+
+      let w=0, h=0, cols=0, drops=[];
+      function resize(){
+        const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+        w = Math.floor(window.innerWidth);
+        h = Math.floor(window.innerHeight);
+        c.width = Math.floor(w * dpr);
+        c.height = Math.floor(h * dpr);
+        c.style.width = w + "px";
+        c.style.height = h + "px";
+        ctx.setTransform(dpr,0,0,dpr,0,0);
+
+        const fontSize = 16;
+        cols = Math.floor(w / fontSize);
+        drops = Array.from({length: cols}, () => Math.random() * h / fontSize);
+        ctx.font = "700 16px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
+        ctx.textBaseline = "top";
+      }
+      resize();
+      window.addEventListener('resize', resize, {passive:true});
+
+      let last=0;
+      function frame(t){
+        // cap to ~40fps for battery friendliness
+        if (t - last < 25) { requestAnimationFrame(frame); return; }
+        last = t;
+
+        // fade
+        ctx.fillStyle = "rgba(2, 6, 10, 0.12)";
+        ctx.fillRect(0,0,w,h);
+
+        const fontSize = 16;
+        for (let i=0; i<cols; i++){
+          const x = i * fontSize;
+          const y = drops[i] * fontSize;
+
+          const ch = glyphs[(Math.random()*glyphs.length)|0];
+
+          // green with subtle blue highlights
+          if (Math.random() < 0.03){
+            ctx.fillStyle = "rgba(0, 229, 255, .55)";
+          } else {
+            ctx.fillStyle = "rgba(34, 255, 143, .75)";
+          }
+          ctx.fillText(ch, x, y);
+
+          // reset
+          if (y > h && Math.random() > 0.975) drops[i] = 0;
+          drops[i] += 0.85 + Math.random()*0.75;
+        }
+
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
