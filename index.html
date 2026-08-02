@@ -125,7 +125,7 @@
     }
     .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
     .dot.math{background:linear-gradient(135deg, var(--neon), var(--neon2))}
-    .dot.sdr{background:linear-gradient(135deg, #22ff8f, #10b981)}
+    .dot.sdr,.dot.english{background:linear-gradient(135deg, #22ff8f, #10b981)}
     .dot.tool{background:linear-gradient(135deg, #a855f7, #22ff8f)}
 
     /* Matrix terminal toggle (Option C: RAIN::TRUE/FALSE) */
@@ -253,7 +253,7 @@
       height:6px;
       background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(0,229,255,.75));
     }
-    .card.sdr::before{background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(16,185,129,.75))}
+    .card.sdr::before,.card.english::before{background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(16,185,129,.75))}
     .card.tool::before{background:linear-gradient(135deg, rgba(168,85,247,.85), rgba(34,255,143,.85))}
 
     /* faint diagonal “code” lines */
@@ -300,7 +300,7 @@
       text-shadow: 0 0 10px rgba(34,255,143,.10);
     }
     .badge.math{border-color:rgba(0,229,255,.25); background:rgba(0,229,255,.08)}
-    .badge.sdr{border-color:rgba(16,185,129,.28); background:rgba(16,185,129,.08)}
+    .badge.sdr,.badge.english{border-color:rgba(16,185,129,.28); background:rgba(16,185,129,.08)}
     .badge.tool{border-color:rgba(168,85,247,.30); background:rgba(168,85,247,.10)}
     .badge.ready{border-color:rgba(253,224,71,.35); background:rgba(253,224,71,.08); color:#fff7cc}
 
@@ -397,7 +397,7 @@
       <a class="chip" href="#p1-math"><span class="dot math"></span> P1 Math</a>
       <a class="chip" href="#p2-math"><span class="dot math"></span> P2 Math</a>
       <a class="chip" href="#p3-math"><span class="dot math"></span> P3 Math</a>
-      <a class="chip" href="#sdr"><span class="dot sdr"></span> SDR</a>
+      <a class="chip" href="#english"><span class="dot english"></span> English</a>
       <a class="chip" href="#tools"><span class="dot tool"></span> General Tools</a>
 
       <!-- Matrix toggle: default ON -->
@@ -1007,18 +1007,18 @@
     </article>
           
 
-    <!-- ===================== SDR ===================== -->
-    <section id="sdr" class="section anchor">
+    <!-- ===================== ENGLISH ===================== -->
+    <section id="english" class="section anchor">
       <div class="section-head">
         <div>
-          <h2 class="section-title"><span class="dot sdr"></span> SDR • English (Phonics)</h2>
-          <p class="section-sub">Differentiated phonics tools for on-the-go practice.</p>
+          <h2 class="section-title"><span class="dot english"></span> English</h2>
+          <p class="section-sub">Phonics, reading, spelling and language activities for differentiated learning.</p>
         </div>
-        <div class="section-tag">Sorted: Level → Subject</div>
+        <div class="section-tag">English Programmes</div>
       </div>
 
       <div class="grid">
-        <article class="card sdr">
+        <article class="card english">
           <h3>SDR Interactive Grid Chart</h3>
           <p>SDR Interactive Grid Chart for students to learn phonics on the go. Good for differentiated instruction.</p>
           <div class="badges">
@@ -1032,7 +1032,7 @@
           </div>
           <div class="note">This link is ready to embed in SLS.</div>
         </article>
-         <article class="card sdr">
+         <article class="card english">
           <h3>SDR P3 One Minute Dash</h3>
           <p>SDR One Minute Dash for Phonograms and HFW!</p>
           <div class="badges">
@@ -1043,7 +1043,7 @@
             </div>
           <div class="note">This link is ready to embed in SLS.</div>
         </article>
-        <article class="card sdr">
+        <article class="card english">
           <h3>SDR Sound Garden</h3>
           <p>SDR Sound Garden for differentiated instruction.</p>
           <div class="badges">
@@ -1057,7 +1057,7 @@
           <div class="note">This link is ready to embed in SLS.</div>
         </article>
 
-         <article class="card sdr">
+         <article class="card english">
           <h3>P3 SDR One Stop Hub-Everything You Need for P3 SDR!</h3>
           <p>P3 SDR One Stop Hub for Differentiated Instruction.</p>
           <div class="badges">
@@ -1067,6 +1067,43 @@
             <a class="btn primary" href="https://limkimsze-maker.github.io/P3-SDR-One-Stop-Hub/" target="_blank" rel="noopener">Open</a>
           </div>
           <div class="note">This link is ready to embed in SLS.</div>
+        </article>
+
+        <article class="card english">
+          <h3>Teaching of Spelling for SDR 2.0, M-G-I, or Customise Your Own!</h3>
+          <p>Teach SDR spelling using pre-programmed words or customise your own spelling word lists.</p>
+          <div class="badges">
+            <span class="badge english">English</span><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Open</a>
+            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/6428fcb2-5687-414d-8abd-dad2aa4f53d4/section/98733397/activity/98733398?pageNo=1" target="_blank" rel="noopener">Link to SLS</a>
+          </div>
+          <div class="note">Teachers can load the pre-programmed words or customise their own spelling word lists.</div>
+        </article>
+
+        <article class="card english">
+          <h3>English Word Order and Matching</h3>
+          <p>Create interactive word-order and matching activities for English lessons.</p>
+          <div class="badges">
+            <span class="badge english">English</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/English-Word-Order-and-Matching/" target="_blank" rel="noopener">Open</a>
+          </div>
+          <div class="note">Teachers can customise the content for word-order and matching practice.</div>
+        </article>
+
+        <article class="card english">
+          <h3>P1 to P3 Spelling Number Words Tug of War</h3>
+          <p>A tug-of-war game for learning and practising the spelling of number words.</p>
+          <div class="badges">
+            <span class="badge english">English</span><span class="badge math">Math</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="https://limkimsze-maker.github.io/P1-to-P3-Spelling-Number-Words-Tug-of-War/" target="_blank" rel="noopener">Open</a>
+          </div>
+          <div class="note">Practise number-word spelling through a fun game.</div>
         </article>
       </div>
     </section>
@@ -1093,20 +1130,6 @@
             <a class="btn" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Source</a>
           </div>
           <div class="note">Teachers can create HTML5 with Practice + Test structure or Test Only structure.</div>
-        </article>
-
-        <article class="card tool">
-          <h3>Teaching of Spelling for SDR 2.0, M-G-I, or Customise Your Own!</h3>
-          <p>Teach SDR spelling using pre-programmed words or customise your own spelling word lists.</p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">General</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/6428fcb2-5687-414d-8abd-dad2aa4f53d4/section/98733397/activity/98733398?pageNo=1" target="_blank" rel="noopener">Link to SLS</a>
-          </div>
-          <div class="note">Teachers can teach SDR spelling by loading the pre-programmed words or customise their own spelling word lists.</div>
         </article>
 
         <article class="card tool">
@@ -1256,18 +1279,6 @@
           <div class="note">Fun shooting game to learn multiplication level by level!</div>
         </article>
 
-        <article class="card tool">
-          <h3>P1 to P3 Spelling Number Words Tug of War</h3>
-          <p>P1 to P3 Spelling Number Words Tug of War </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/P1-to-P3-Spelling-Number-Words-Tug-of-War/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Tug of War to learn spelling of Number Words!</div>
-        </article>
-        
         <article class="card tool">
           <h3>P3 Math Topics</h3>
           <p>P3 Math Topics </p>
