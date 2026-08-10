@@ -1,0 +1,40 @@
+from pathlib import Path
+
+path = Path("index.html")
+raw = path.read_bytes()
+had_crlf = b"\r\n" in raw
+text = raw.decode("utf-8").replace("\r\n", "\n")
+
+url = "https://limkimsze-maker.github.io/P3-Length-Mass-and-Volume-Sports-Fiesta-/"
+if url in text:
+    print("Sports Fiesta link already exists; no change needed.")
+    raise SystemExit(0)
+
+english_marker = "    <!-- ===================== ENGLISH ===================== -->"
+if english_marker not in text:
+    raise SystemExit("Could not find ENGLISH section marker.")
+
+before, after = text.split(english_marker, 1)
+p3_close = "    </div>\n    </section>\n    </article>\n          \n\n"
+if not before.endswith(p3_close):
+    raise SystemExit("Could not find expected end of P3 Math section.")
+
+card = """        <article class=\"card math\">
+          <h3>P3 Length, Mass and Volume Sports Fiesta</h3>
+          <p>Sports-themed practice for Primary 3 length, mass and volume.</p>
+          <div class=\"badges\">
+            <span class=\"badge math\">P3 Math</span><span class=\"badge\">Primary</span><span class=\"badge ready\">SLS-ready</span>
+          </div>
+          <div class=\"actions\">
+            <a class=\"btn primary\" href=\"https://limkimsze-maker.github.io/P3-Length-Mass-and-Volume-Sports-Fiesta-/\" target=\"_blank\" rel=\"noopener\">Open</a>
+          </div>
+          <div class=\"note\">Practise length, mass and volume through sports-themed activities.</div>
+        </article>
+"""
+
+before = before[:-len(p3_close)] + card + p3_close
+updated = before + english_marker + after
+if had_crlf:
+    updated = updated.replace("\n", "\r\n")
+path.write_bytes(updated.encode("utf-8"))
+print("Added P3 Length, Mass and Volume Sports Fiesta card.")
