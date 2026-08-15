@@ -45,7 +45,6 @@
       overflow-x:hidden;
     }
 
-    /* subtle “terminal grid” + vignette */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -66,14 +65,13 @@
       z-index:0;
     }
 
-    /* Matrix code rain canvas */
     #rain{
       position:fixed; inset:0;
-      z-index:0; /* behind content */
+      z-index:0;
       pointer-events:none;
       opacity:.55;
       filter: blur(.2px);
-      display:block; /* default on; JS may hide if user turned it off */
+      display:block;
     }
 
     header{
@@ -91,7 +89,6 @@
     header p{margin:0;color:rgba(143,255,200,.85)}
     .wrap{max-width:1150px;margin:0 auto;padding:14px 16px 28px; position:relative; z-index:1}
 
-    /* top quick links */
     .jump{
       display:flex; flex-wrap:wrap; gap:10px;
       justify-content:center;
@@ -128,42 +125,30 @@
     .dot.sdr,.dot.english{background:linear-gradient(135deg, #22ff8f, #10b981)}
     .dot.tool{background:linear-gradient(135deg, #a855f7, #22ff8f)}
 
-    /* Matrix terminal toggle (Option C: RAIN::TRUE/FALSE) */
     .toggle-terminal{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       letter-spacing:.6px;
       text-transform:uppercase;
-
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:2px;
-
       padding:8px 12px;
       border-radius:12px;
-
       border:1px solid rgba(245,158,11,.82);
       background:linear-gradient(180deg, rgba(253,224,71,.96), rgba(250,204,21,.90));
-
       color:#3b2f05;
       font-weight:900;
       font-size:.9rem;
-
       cursor:pointer;
-      box-shadow:
-        0 14px 26px rgba(0,0,0,.28),
-        0 0 0 1px rgba(255,255,255,.12) inset;
-
+      box-shadow:0 14px 26px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.12) inset;
       text-shadow:none;
       transition:transform .1s ease, box-shadow .1s ease, filter .1s ease, border-color .1s ease;
     }
-    /* fixed width so it never “jumps” when TRUE/FALSE changes */
     .toggle-terminal .label{display:inline-block; min-width:10.8ch; text-align:left}
     .toggle-terminal:hover{
       transform:translateY(-1px);
-      box-shadow:
-        0 20px 34px rgba(0,0,0,.35),
-        0 0 0 1px rgba(255,255,255,.14) inset;
+      box-shadow:0 20px 34px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.14) inset;
       filter:saturate(1.06);
     }
     .toggle-terminal:active{transform:translateY(0)}
@@ -173,19 +158,11 @@
       background:linear-gradient(180deg, rgba(254,240,138,.90), rgba(253,224,71,.82));
       color:#5b4506;
       text-shadow:none;
-      box-shadow:
-        0 14px 26px rgba(0,0,0,.25),
-        0 0 0 1px rgba(255,255,255,.10) inset;
+      box-shadow:0 14px 26px rgba(0,0,0,.25),0 0 0 1px rgba(255,255,255,.10) inset;
     }
-    .cursor{
-      display:inline-block;
-      margin-left:2px;
-      opacity:1;
-      animation: blink 1s steps(2, end) infinite;
-      color:#7c2d12;
-    }
+    .cursor{display:inline-block;margin-left:2px;opacity:1;animation: blink 1s steps(2, end) infinite;color:#7c2d12}
     .toggle-terminal.off .cursor{opacity:.55}
-    @keyframes blink{ 0%,49%{opacity:1} 50%,100%{opacity:0} }
+    @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
 
     .section{margin:22px 0 28px}
     .section-head{
@@ -198,184 +175,42 @@
       box-shadow: 0 18px 55px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.10) inset;
       margin-bottom:14px;
     }
-    .section-title{
-      margin:0;
-      font-size:1.15rem;
-      display:flex; align-items:center; gap:10px;
-      color:#3b2f05;
-      text-shadow:none;
-    }
-    .section-sub{
-      margin:4px 0 0;
-      color:#5b4506;
-      font-size:.92rem;
-      font-weight:600;
-    }
-    .section-tag{
-      font-size:.8rem;
-      font-weight:900;
-      color:#3b2f05;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(245,158,11,.75);
-      background:rgba(255,248,196,.75);
-      white-space:nowrap;
-      box-shadow:0 8px 18px rgba(245,158,11,.18);
-    }
+    .section-title{margin:0;font-size:1.15rem;display:flex;align-items:center;gap:10px;color:#3b2f05;text-shadow:none}
+    .section-sub{margin:4px 0 0;color:#5b4506;font-size:.92rem;font-weight:600}
+    .section-tag{font-size:.8rem;font-weight:900;color:#3b2f05;padding:6px 10px;border-radius:999px;border:1px solid rgba(245,158,11,.75);background:rgba(255,248,196,.75);white-space:nowrap;box-shadow:0 8px 18px rgba(245,158,11,.18)}
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(265px,1fr));
-      gap:16px;
-    }
-
-    .card{
-      position:relative;
-      background:var(--card);
-      border-radius:var(--radius);
-      padding:16px;
-      border:1px solid var(--cardLine);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
-      backdrop-filter: blur(10px);
-    }
-    .card:hover{
-      transform:translateY(-2px);
-      filter:saturate(1.08);
-      box-shadow: 0 26px 75px rgba(0,0,0,.60);
-    }
-
-    /* top neon scan bar */
-    .card::before{
-      content:"";
-      position:absolute; inset:0 0 auto 0;
-      height:6px;
-      background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(0,229,255,.75));
-    }
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:16px}
+    .card{position:relative;background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid var(--cardLine);box-shadow:var(--shadow);overflow:hidden;transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;backdrop-filter: blur(10px)}
+    .card:hover{transform:translateY(-2px);filter:saturate(1.08);box-shadow: 0 26px 75px rgba(0,0,0,.60)}
+    .card::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(0,229,255,.75))}
     .card.sdr::before,.card.english::before{background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(16,185,129,.75))}
     .card.tool::before{background:linear-gradient(135deg, rgba(168,85,247,.85), rgba(34,255,143,.85))}
-
-    /* faint diagonal “code” lines */
-    .card::after{
-      content:"";
-      position:absolute; inset:-120px -80px auto auto;
-      width:320px; height:220px;
-      transform: rotate(18deg);
-      background:
-        repeating-linear-gradient(
-          0deg,
-          rgba(34,255,143,.10),
-          rgba(34,255,143,.10) 1px,
-          transparent 1px,
-          transparent 9px
-        );
-      opacity:.35;
-      pointer-events:none;
-      mix-blend-mode:screen;
-      border-radius:18px;
-    }
-
-    .card h3{
-      margin:6px 0 6px;
-      font-size:1.03rem;
-      letter-spacing:.2px;
-    }
-    .card p{
-      margin:0 0 10px;
-      color:rgba(215,255,233,.82);
-      font-size:.95rem;
-      line-height:1.35;
-    }
-
-    .badges{display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 12px}
-    .badge{
-      font-size:.75rem;
-      font-weight:900;
-      padding:3px 10px;
-      border-radius:999px;
-      border:1px solid rgba(34,255,143,.18);
-      background:rgba(34,255,143,.06);
-      color:rgba(215,255,233,.92);
-      text-shadow: 0 0 10px rgba(34,255,143,.10);
-    }
-    .badge.math{border-color:rgba(0,229,255,.25); background:rgba(0,229,255,.08)}
-    .badge.sdr,.badge.english{border-color:rgba(16,185,129,.28); background:rgba(16,185,129,.08)}
-    .badge.tool{border-color:rgba(168,85,247,.30); background:rgba(168,85,247,.10)}
-    .badge.ready{border-color:rgba(253,224,71,.35); background:rgba(253,224,71,.08); color:#fff7cc}
-
-    .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:9px 12px;
-      border-radius:14px;
-      border:1px solid var(--btnLine);
-      text-decoration:none;
-      color:var(--ink);
-      background:var(--btnBg);
-      font-weight:900;
-      font-size:.9rem;
-      transition:transform .08s ease, box-shadow .08s ease, filter .08s ease;
-      box-shadow: 0 14px 26px rgba(0,0,0,.35);
-    }
-    .btn:hover{transform:translateY(-1px); box-shadow:0 20px 34px rgba(0,0,0,.45); filter:saturate(1.12)}
+    .card::after{content:"";position:absolute;inset:-120px -80px auto auto;width:320px;height:220px;transform: rotate(18deg);background:repeating-linear-gradient(0deg,rgba(34,255,143,.10),rgba(34,255,143,.10) 1px,transparent 1px,transparent 9px);opacity:.35;pointer-events:none;mix-blend-mode:screen;border-radius:18px}
+    .card h3{margin:6px 0 6px;font-size:1.03rem;letter-spacing:.2px}
+    .card p{margin:0 0 10px;color:rgba(215,255,233,.82);font-size:.95rem;line-height:1.35}
+    .badges{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px}
+    .badge{font-size:.75rem;font-weight:900;padding:3px 10px;border-radius:999px;border:1px solid rgba(34,255,143,.18);background:rgba(34,255,143,.06);color:rgba(215,255,233,.92);text-shadow:0 0 10px rgba(34,255,143,.10)}
+    .badge.math{border-color:rgba(0,229,255,.25);background:rgba(0,229,255,.08)}
+    .badge.sdr,.badge.english{border-color:rgba(16,185,129,.28);background:rgba(16,185,129,.08)}
+    .badge.tool{border-color:rgba(168,85,247,.30);background:rgba(168,85,247,.10)}
+    .badge.ready{border-color:rgba(253,224,71,.35);background:rgba(253,224,71,.08);color:#fff7cc}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border-radius:14px;border:1px solid var(--btnLine);text-decoration:none;color:var(--ink);background:var(--btnBg);font-weight:900;font-size:.9rem;transition:transform .08s ease, box-shadow .08s ease, filter .08s ease;box-shadow:0 14px 26px rgba(0,0,0,.35)}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 20px 34px rgba(0,0,0,.45);filter:saturate(1.12)}
     .btn:active{transform:translateY(0)}
-    .btn.primary{
-      color:#02110a;
-      border-color:transparent;
-      background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(0,229,255,.65));
-      text-shadow:none;
-    }
-
-    .pill-sls{
-      display:inline-flex; align-items:center; gap:6px;
-      font-size:.78rem; font-weight:1000;
-      background:var(--yellow);
-      border:1px solid var(--yellowLine);
-      color:#1f2937;
-      padding:7px 10px;
-      border-radius:999px;
-      text-decoration:none;
-      box-shadow:0 18px 30px rgba(245,158,11,.20);
-      transition:transform .08s ease, box-shadow .08s ease, filter .08s ease;
-    }
-    .pill-sls:hover{transform:translateY(-1px); box-shadow:0 24px 34px rgba(245,158,11,.25); filter:saturate(1.05)}
+    .btn.primary{color:#02110a;border-color:transparent;background:linear-gradient(135deg, rgba(34,255,143,.95), rgba(0,229,255,.65));text-shadow:none}
+    .pill-sls{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:1000;background:var(--yellow);border:1px solid var(--yellowLine);color:#1f2937;padding:7px 10px;border-radius:999px;text-decoration:none;box-shadow:0 18px 30px rgba(245,158,11,.20);transition:transform .08s ease, box-shadow .08s ease, filter .08s ease}
+    .pill-sls:hover{transform:translateY(-1px);box-shadow:0 24px 34px rgba(245,158,11,.25);filter:saturate(1.05)}
     .pill-sls:active{transform:translateY(0)}
-    .pill-sls:focus-visible{outline:3px solid rgba(245,158,11,.55); outline-offset:2px}
-
-    .note{
-      margin-top:10px;
-      font-size:.86rem;
-      color:rgba(143,255,200,.80);
-      line-height:1.35;
-    }
-
-    footer{
-      max-width:1150px;
-      margin:30px auto 24px;
-      color:rgba(143,255,200,.85);
-      font-size:.92rem;
-      padding:0 16px;
-      text-align:center;
-      text-shadow: 0 0 14px rgba(34,255,143,.12);
-      position:relative;
-      z-index:1;
-    }
+    .pill-sls:focus-visible{outline:3px solid rgba(245,158,11,.55);outline-offset:2px}
+    .note{margin-top:10px;font-size:.86rem;color:rgba(143,255,200,.80);line-height:1.35}
+    footer{max-width:1150px;margin:30px auto 24px;color:rgba(143,255,200,.85);font-size:.92rem;padding:0 16px;text-align:center;text-shadow:0 0 14px rgba(34,255,143,.12);position:relative;z-index:1}
     footer a{color:inherit}
     footer img{vertical-align:middle;margin-left:10px}
-
     .anchor{scroll-margin-top:18px}
-
-    @media (prefers-reduced-motion: reduce){
-      .btn,.chip,.card,.toggle-terminal{transition:none}
-      .cursor{animation:none}
-    }
+    @media (prefers-reduced-motion: reduce){.btn,.chip,.card,.toggle-terminal{transition:none}.cursor{animation:none}}
   </style>
 
-  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z848TQ1P2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -383,1098 +218,171 @@
     gtag('js', new Date());
     gtag('config', 'G-6Z848TQ1P2');
   </script>
-<script src="https://cdn.counter.dev/script.js" data-id="825e93b6-ce99-40ef-8bcc-125f13297433" data-utcoffset="8"></script>
+  <script src="https://cdn.counter.dev/script.js" data-id="825e93b6-ce99-40ef-8bcc-125f13297433" data-utcoffset="8"></script>
 </head>
-
 <body>
   <canvas id="rain" aria-hidden="true"></canvas>
-
   <header>
     <h1>Lim Kim Sze — Interactive Tools</h1>
     <p>A gallery of my interactive teaching tools.</p>
-
     <nav class="jump" aria-label="Jump to sections">
       <a class="chip" href="#p1-math"><span class="dot math"></span> P1 Math</a>
       <a class="chip" href="#p2-math"><span class="dot math"></span> P2 Math</a>
       <a class="chip" href="#p3-math"><span class="dot math"></span> P3 Math</a>
       <a class="chip" href="#english"><span class="dot english"></span> English</a>
       <a class="chip" href="#tools"><span class="dot tool"></span> General Tools</a>
-
-      <!-- Matrix toggle: default ON -->
-      <button class="toggle-terminal" id="rainToggle" type="button" aria-pressed="true">
-        <span class="label">RAIN::TRUE</span><span class="cursor" aria-hidden="true">_</span>
-      </button>
+      <button class="toggle-terminal" id="rainToggle" type="button" aria-pressed="true"><span class="label">RAIN::TRUE</span><span class="cursor" aria-hidden="true">_</span></button>
     </nav>
   </header>
 
   <main class="wrap">
- <!-- ===================== P1 MATH ===================== -->
     <section id="p1-math" class="section anchor">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title"><span class="dot math"></span> Primary 1 • Mathematics</h2>
-          <p class="section-sub">P1 Mathematics</p>
-        </div>
-        <div class="section-tag">Sorted: Level → Subject</div>
-      </div>
-
+      <div class="section-head"><div><h2 class="section-title"><span class="dot math"></span> Primary 1 • Mathematics</h2><p class="section-sub">P1 Mathematics</p></div><div class="section-tag">Sorted: Level → Subject</div></div>
       <div class="grid">
-        <article class="card math">
-          <h3>P1 Factual Fluency</h3>
-          <p>Chapter 1 (Number to 10) to Chapter 3 (Subtraction)</p>
-          <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1_FF_C1_Number_to_10_to_C3_Subtraction-/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        <article class="card math">
-          <h3>P1 Addition/Subtraction Within 10 Using Count On/Count Backward Strategy</h3>
-          <p>P1 Addition/Subtraction Within 10 Using Count On/Count Backward Strategy</p>
-          <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1_Addition_Subtraction_Within_10_Count_On_or_Count_Backward/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        <article class="card math">
-          <h3>P1 Fact Family</h3>
-          <p>P1 Fact Family</p>
-          <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1_Fact_Family/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-                
-        <article class="card math">
-          <h3>P1 Addition Within 10 - Breakfast Cafe! Make 10 All the Way!</h3>
-          <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Make_10_Breakfast_Cafe_Main_Page/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        
-        <article class="card math">
-          <h3>P1 Subtraction Within 10 - Ice Cream Cart!</h3>
-        <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1_Subtraction_With_10_Ice_Cream_Cart_Main_Page/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        
-        <article class="card math">
-          <h3>P1 Shapes : Sweet Cake Shop!</h3>
-        <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1-Shapes-Sweet-Cake-Shop-Cover/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-
-         <article class="card math">
-          <h3>P1 Number to 20 : Cookie Shop</h3>
-        <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Number-to-20-Cookie-Shop-Cover/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-         <article class="card math">
-          <h3>P1 Addition and Subtraction Within 20</h3>
-        <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Adding-and-Subtracting-Within-20-Main-Page/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        <article class="card math">
-          <h3>P1 Counting Money</h3>
-        <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1_Counting_Money/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        
-        <article class="card math">
-          <h3>P1 Comprehensive Factual Fluency</h3>
-        <div class="badges">
-            <span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1-Comprehensive-Factual-Fluency/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        </div>
+        <article class="card math"><h3>P1 Factual Fluency</h3><p>Chapter 1 (Number to 10) to Chapter 3 (Subtraction)</p><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1_FF_C1_Number_to_10_to_C3_Subtraction-/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Addition/Subtraction Within 10 Using Count On/Count Backward Strategy</h3><p>P1 Addition/Subtraction Within 10 Using Count On/Count Backward Strategy</p><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1_Addition_Subtraction_Within_10_Count_On_or_Count_Backward/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Fact Family</h3><p>P1 Fact Family</p><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1_Fact_Family/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Addition Within 10 - Breakfast Cafe! Make 10 All the Way!</h3><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Make_10_Breakfast_Cafe_Main_Page/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Subtraction Within 10 - Ice Cream Cart!</h3><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1_Subtraction_With_10_Ice_Cream_Cart_Main_Page/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Shapes : Sweet Cake Shop!</h3><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1-Shapes-Sweet-Cake-Shop-Cover/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Number to 20 : Cookie Shop</h3><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Number-to-20-Cookie-Shop-Cover/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Addition and Subtraction Within 20</h3><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Adding-and-Subtracting-Within-20-Main-Page/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Counting Money</h3><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1_Counting_Money/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P1 Comprehensive Factual Fluency</h3><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1-Comprehensive-Factual-Fluency/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+      </div>
     </section>
 
-    <!-- ===================== P2 MATH ===================== -->
     <section id="p2-math" class="section anchor">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title"><span class="dot math"></span> Primary 2 • Mathematics</h2>
-          <p class="section-sub">Fractions practice tools (fast feedback, kid-friendly).</p>
-        </div>
-        <div class="section-tag">Sorted: Level → Subject</div>
-      </div>
-
+      <div class="section-head"><div><h2 class="section-title"><span class="dot math"></span> Primary 2 • Mathematics</h2><p class="section-sub">Fractions practice tools (fast feedback, kid-friendly).</p></div><div class="section-tag">Sorted: Level → Subject</div></div>
       <div class="grid">
-        <article class="card math">
-          <h3>P2 Write the Fractions</h3>
-          <p>Writing fractions with instant feedback.</p>
-          <div class="badges">
-            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4f0d0fee-b070-4546-bf69-877d7bb34571" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P2 Comparing and Ordering Unit Fractions</h3>
-          <p>Compare and order unit fractions (randomised).</p>
-          <div class="badges">
-            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96517000" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry freely.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P2 Comparing and Ordering Like Fractions</h3>
-          <p>Compare and order like fractions (randomised).</p>
-          <div class="badges">
-            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96516999?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry freely.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P2 Adding Like Fractions</h3>
-          <p>P2 adding like fractions.</p>
-          <div class="badges">
-            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517001" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P2 Subtracting Like Fractions</h3>
-          <p>P2 subtracting like fractions.</p>
-          <div class="badges">
-            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517002" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-        </article>
-        <article class="card math">
-          <h3>P2 Counting Money</h3>
-          <p>P2 Counting Money</p>
-          <div class="badges">
-            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Counting_Money/" target="_blank" rel="noopener">Website</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-        </article>
-        <article class="card math">
-          <h3>P2 Money Conversion</h3>
-          <p>P2 Money Conversion</p>
-          <div class="badges">
-            <span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P2_Money_Conversion/" target="_blank" rel="noopener">Website</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-        </article>
+        <article class="card math"><h3>P2 Write the Fractions</h3><p>Writing fractions with instant feedback.</p><div class="badges"><span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P2_Write_the_fractions_on_phone/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4f0d0fee-b070-4546-bf69-877d7bb34571" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P2 Comparing and Ordering Unit Fractions</h3><p>Compare and order unit fractions (randomised).</p><div class="badges"><span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Unit_Fractions_Randomised/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96517000" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry freely.</div></article>
+        <article class="card math"><h3>P2 Comparing and Ordering Like Fractions</h3><p>Compare and order like fractions (randomised).</p><div class="badges"><span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P2_Comparing_Like_Fractions_Randomised/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/19a5c0ee-9695-42b6-85e8-a9380827634e/section/96516998/activity/96516999?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry freely.</div></article>
+        <article class="card math"><h3>P2 Adding Like Fractions</h3><p>P2 adding like fractions.</p><div class="badges"><span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P2_Adding_Like_Fractions/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517001" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div></article>
+        <article class="card math"><h3>P2 Subtracting Like Fractions</h3><p>P2 subtracting like fractions.</p><div class="badges"><span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P2_Subtracting_Like_Fractions/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/preview/3c0adf7d-8b49-4f77-bfca-bcbf46211535/section/96516998/activity/96517002" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div></article>
+        <article class="card math"><h3>P2 Counting Money</h3><p>P2 Counting Money</p><div class="badges"><span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P2_Counting_Money/" target="_blank" rel="noopener">Website</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div></article>
+        <article class="card math"><h3>P2 Money Conversion</h3><p>P2 Money Conversion</p><div class="badges"><span class="badge math">P2 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P2_Money_Conversion/" target="_blank" rel="noopener">Website</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div></article>
       </div>
     </section>
 
-    <!-- ===================== P3 MATH ===================== -->
     <section id="p3-math" class="section anchor">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title"><span class="dot math"></span> Primary 3 • Mathematics</h2>
-          <p class="section-sub">Geometry, time, volume, and fraction reasoning.</p>
-        </div>
-        <div class="section-tag">Sorted: Level → Subject</div>
-      </div>
-
+      <div class="section-head"><div><h2 class="section-title"><span class="dot math"></span> Primary 3 • Mathematics</h2><p class="section-sub">Geometry, time, volume, and fraction reasoning.</p></div><div class="section-tag">Sorted: Level → Subject</div></div>
       <div class="grid">
-        <article class="card math">
-          <h3>P3 Math Parallel &amp; Perpendicular — Draw-Through-C</h3>
-          <p>Identify/draw lines through a point with instant feedback.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/41198435-ed4d-4297-8ea8-791a78129de1" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P3 Math Time Duration</h3>
-          <p>Finding out duration using a timeline with instant feedback.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/bb54f554-c2d8-4237-bbf1-4ddf7a9ee5f3/section/97233706/activity/97233707" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P3 Addition and Subtraction Puzzles</h3>
-          <p>P3 addition and subtraction puzzles. Teacher's Guide password is <b>0000</b>.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4c1d41c5-4398-449b-81f3-e193550737e0/section/97233912/activity/97233913?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Password to unlock Guide for Teachers is “0000”.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P3 Comparing and Ordering Unlike Fractions</h3>
-          <p>P3 comparing and ordering unlike fractions.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/b4f9402a-96ce-41d4-a02e-cd8f07f8a944/section/97665230/activity/97665231" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Pupils can only move on to Test after getting 12/12 for their Practice.</div>
-        </article>
-
-        <article class="card math">
-          <h3>P3 Measuring Volumes in Milliliters</h3>
-          <p>P3 measuring volumes in milliliters.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/a16b8ac4-52b9-4e85-93c5-a3c1ad412732/section/97233659/activity/97233660?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-        </article>
-        <article class="card math">
-          <h3>P3 Number Pattern</h3>
-          <p>P3 More/Less Adventure & Train Sequence</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_number_pattern/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_number_pattern/" target="_blank" rel="noopener">Source</a>
-           <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/ccfc54b3-85c1-4fd6-8deb-33b052063d2b" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div>
-        </article>
-        <article class="card math">
-          <h3>P3 Sum and Difference</h3>
-          <p>P3 Sum and Difference</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Sum_Difference_FillBlank/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/Sum_Difference_FillBlank/" target="_blank" rel="noopener">Source</a>
-             <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/92ffee00-6d78-4ea5-a6de-43675b6c45b2" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">Good for speed dash. Pupils can retry as many times as they like.</div>
-        </article>
-        <article class="card math">
-          <h3>P3 Sum and Difference Modelling</h3>
-          <p>P3 Sum and Difference Modelling</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Sum_and_Difference_Model/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_Sum_and_Difference_Model/" target="_blank" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for teaching models. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-        <article class="card math">
-          <h3>Saving Quest! - Making 1 dollar, 10 dollars and 100 dollars</h3>
-          <p>Saving Quest! - Making 1 dollar, 10 dollars and 100 dollars</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Saving_Quest_Making_Money_Up_To_100/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_Saving_Quest_Making_Money_Up_To_100/" target="_blank" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for practising adding to $1, $10 and $100. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-        <article class="card math">
-          <h3>Mental Sum Challenge!</h3>
-          <p>Mental Sum Challenge! Add and Subtract fast using Various Techniques! </p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Mental_Sum_Challenge/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P3_Mental_Sum_Challenge/" target="_blank" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for practising adding and subtracting mentally. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-          <article class="card math">
-          <p>Addition of Money.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Adding_Money/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for practising adding of money. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-        <article class="card math">
-          <p>Subtraction of Money.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Subtracting_Money/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for practising subtraction of money. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-        <article class="card math">
-          <p>P3 Money Word Problems</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_Money_Word_Problems/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for practising money word problems. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-        <article class="card math">
-          <p>P3 Multiplication - Multiplying up to 3 digits by 1 digit</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_Multiplication_up_to_3D_multiply_1D/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for practising multiplication algorithms. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-        </article>
-        <article class="card math">
-          <p>P3 Division - Dividing up to 3 digits by 1 digit</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_Division_3D_by_1D/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for practising long division algorithms. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-        <article class="card math">
-          <p>P3 Times Table Builder</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/Times-Table-Fact-Builder/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Good for understanding how to build times table. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-            </article>
-        
-         <article class="card math">
-          <p>P3 Multiplication Tables 6789 Word Problems 'As Many As'</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Multiplication-Tables-6789-Word-Problems-As-Many-As/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Word Problems on 'as many as', twice as many', '3 times as many' etc...</div>
-        </article>
-        
-          <article class="card math">
-          <p>P3 Multiplication Tables 6789 Word Problems Equal Group</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Multiplication-Tables-6789-Word-Problem-Equal-Groups/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Word Problems on Equal Group</div>
-        </article>
-        <article class="card math">
-          <p>P3 More Word Problems (Pet Evolution of King Hullababoo!)</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3_More_Word_Problems_Monster_Quest_Main_Page/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Play a 8 Stage Game to understand Word Problems. Pupils will witness the evolution of King Hullababoo!.</div>
-        </article>
-        <article class="card math">
-          <p>P3 Equivalent Fractions (Pizza Cafe - Fraction Frenzy!)</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Equivalent-Fractions-Pizza-Cafe/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Play a Game to understand Equivalent Fractions. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-          <article class="card math">
-          <p>P3 Bar Graphs </p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Bar-Graphs/" rel="noopener">Source</a>
-          </div>
-          <div class="note">See the transition from Picture Graphs to Bar Graphs. Pupils can retry as many times as they like. Website is embeddable in SLS.</div>
-        </article>
-
-         <article class="card math">
-          <p>P3 Long Division Ranger : Animal Rescue </p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Long-Division-3D-Animal-Rescue/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can walk in a 3D forest and rescue animals. Website is embeddable in SLS.</div>
-         </article>
-
-         <article class="card math">
-          <p>P3 Uncle Joe and the Key of Product!</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/Uncle-Joe-and-the-Key-of-Product-Main-Page/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can walk in a pyramid and rescue villagers. Website is embeddable in SLS.</div>
-         </article>
-        
-        <article class="card math">
-          <p>P3 Space Angle Sorter!</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Angle-Sorter/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can sort angles by acute, right and obtuse angles for quick recap. Website is embeddable in SLS.</div>
-         </article>
-
-        <article class="card math">
-          <p>P3 Space Parallel and Perpendicular Lines Sorter!</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Perpendicular-and-Parallel-Sorter/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can sort parallel lines and perpendicular lines for quick recap. Website is embeddable in SLS.</div>
-         </article>
-
-         <article class="card math">
-          <p>P3 3D Math Racing Game!</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-3D-Math-Racing-Game/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can race, destroy aliens and solve Math questions. Website is embeddable in SLS.</div>
-         </article>
-
-        
-         <article class="card math">
-          <p>P3 3D Fencing Game!</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Math-Fencing-Game/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can fence to solve Math questions. Website is embeddable in SLS.</div>
-         </article>
-
-        <article class="card math">
-          <p>P3 Multiple River Crossing Game!</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Multiples-Frog-Crossing-River/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can cross the road to solve Math questions. Website is embeddable in SLS.</div>
-         </article>
-
-        <article class="card math">
-          <p>P3 Fractions - Space Max and the Lost Rocket Parts!</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P2-P3-Space-Max-and-the-Lost-Fraction-Rocket-Parts/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can solve Fraction questions and complete missions in space.</div>
-         </article>
-
-         <article class="card math">
-          <p>P3 Fractions on Number Lines</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Fractions-on-Number-Lines/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can solve Fraction on Number Lines questions with Fraction Bar and Discs to aid them.</div>
-         </article>
-
-        
-         <article class="card math">
-          <p>P3 Division Quest</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-          <a class="btn" href="https://limkimsze-maker.github.io/P3-Division-Quest-The-Missing-Total/" rel="noopener">Source</a>
-          </div>
-          <div class="note"> Pupils can find quotient and remainder given a story.</div>
-         </article>
-        <article class="card math">
-          <h3>P3 Length, Mass and Volume Sports Fiesta</h3>
-          <p>Sports-themed practice for Primary 3 length, mass and volume.</p>
-          <div class="badges">
-            <span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3-Length-Mass-and-Volume-Sports-Fiesta-/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">Practise length, mass and volume through sports-themed activities.</div>
-        </article>
-    </div>
+        <article class="card math"><h3>P3 Math Parallel &amp; Perpendicular — Draw-Through-C</h3><p>Identify/draw lines through a point with instant feedback.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_Parallel_Perpendicular_lines/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/41198435-ed4d-4297-8ea8-791a78129de1" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P3 Math Time Duration</h3><p>Finding out duration using a timeline with instant feedback.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_Time_Duration/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/bb54f554-c2d8-4237-bbf1-4ddf7a9ee5f3/section/97233706/activity/97233707" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card math"><h3>P3 Addition and Subtraction Puzzles</h3><p>P3 addition and subtraction puzzles. Teacher's Guide password is <b>0000</b>.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/Addition-and-Subtraction-Puzzles/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/4c1d41c5-4398-449b-81f3-e193550737e0/section/97233912/activity/97233913?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Password to unlock Guide for Teachers is “0000”.</div></article>
+        <article class="card math"><h3>P3 Comparing and Ordering Unlike Fractions</h3><p>P3 comparing and ordering unlike fractions.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_Comparing_Unlike_Fraction/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/b4f9402a-96ce-41d4-a02e-cd8f07f8a944/section/97665230/activity/97665231" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Pupils can only move on to Test after getting 12/12 for their Practice.</div></article>
+        <article class="card math"><h3>P3 Measuring Volumes in Milliliters</h3><p>P3 measuring volumes in milliliters.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_Measuring_Volume_In_ml/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/a16b8ac4-52b9-4e85-93c5-a3c1ad412732/section/97233659/activity/97233660?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div></article>
+        <article class="card math"><h3>P3 Number Pattern</h3><p>P3 More/Less Adventure & Train Sequence</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_number_pattern/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_number_pattern/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/ccfc54b3-85c1-4fd6-8deb-33b052063d2b" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Good for teaching purposes. No score recorded in SLS. Pupils can retry as many times as they like.</div></article>
+        <article class="card math"><h3>P3 Sum and Difference</h3><p>P3 Sum and Difference</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Sum_Difference_FillBlank/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/Sum_Difference_FillBlank/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/92ffee00-6d78-4ea5-a6de-43675b6c45b2" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">Good for speed dash. Pupils can retry as many times as they like.</div></article>
+        <article class="card math"><h3>P3 Sum and Difference Modelling</h3><p>P3 Sum and Difference Modelling</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Sum_and_Difference_Model/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_Sum_and_Difference_Model/" target="_blank" rel="noopener">Source</a></div><div class="note">Good for teaching models. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><h3>Saving Quest! - Making 1 dollar, 10 dollars and 100 dollars</h3><p>Saving Quest! - Making 1 dollar, 10 dollars and 100 dollars</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Saving_Quest_Making_Money_Up_To_100/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_Saving_Quest_Making_Money_Up_To_100/" target="_blank" rel="noopener">Source</a></div><div class="note">Good for practising adding to $1, $10 and $100. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><h3>Mental Sum Challenge!</h3><p>Mental Sum Challenge! Add and Subtract fast using Various Techniques!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Mental_Sum_Challenge/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P3_Mental_Sum_Challenge/" target="_blank" rel="noopener">Source</a></div><div class="note">Good for practising adding and subtracting mentally. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>Addition of Money.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Adding_Money/" rel="noopener">Source</a></div><div class="note">Good for practising adding of money. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>Subtraction of Money.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Subtracting_Money/" rel="noopener">Source</a></div><div class="note">Good for practising subtraction of money. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Money Word Problems</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3_Money_Word_Problems/" rel="noopener">Source</a></div><div class="note">Good for practising money word problems. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Multiplication - Multiplying up to 3 digits by 1 digit</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3_Multiplication_up_to_3D_multiply_1D/" rel="noopener">Source</a></div><div class="note">Good for practising multiplication algorithms. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Division - Dividing up to 3 digits by 1 digit</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3_Division_3D_by_1D/" rel="noopener">Source</a></div><div class="note">Good for practising long division algorithms. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Times Table Builder</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Times-Table-Fact-Builder/" rel="noopener">Source</a></div><div class="note">Good for understanding how to build times table. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Multiplication Tables 6789 Word Problems 'As Many As'</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Multiplication-Tables-6789-Word-Problems-As-Many-As/" rel="noopener">Source</a></div><div class="note">Word Problems on 'as many as', twice as many', '3 times as many' etc...</div></article>
+        <article class="card math"><p>P3 Multiplication Tables 6789 Word Problems Equal Group</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Multiplication-Tables-6789-Word-Problem-Equal-Groups/" rel="noopener">Source</a></div><div class="note">Word Problems on Equal Group</div></article>
+        <article class="card math"><p>P3 More Word Problems (Pet Evolution of King Hullababoo!)</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3_More_Word_Problems_Monster_Quest_Main_Page/" rel="noopener">Source</a></div><div class="note">Play a 8 Stage Game to understand Word Problems. Pupils will witness the evolution of King Hullababoo!.</div></article>
+        <article class="card math"><p>P3 Equivalent Fractions (Pizza Cafe - Fraction Frenzy!)</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Equivalent-Fractions-Pizza-Cafe/" rel="noopener">Source</a></div><div class="note">Play a Game to understand Equivalent Fractions. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Bar Graphs</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Bar-Graphs/" rel="noopener">Source</a></div><div class="note">See the transition from Picture Graphs to Bar Graphs. Pupils can retry as many times as they like. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Long Division Ranger : Animal Rescue</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Long-Division-3D-Animal-Rescue/" rel="noopener">Source</a></div><div class="note">Pupils can walk in a 3D forest and rescue animals. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Uncle Joe and the Key of Product!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Uncle-Joe-and-the-Key-of-Product-Main-Page/" rel="noopener">Source</a></div><div class="note">Pupils can walk in a pyramid and rescue villagers. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Space Angle Sorter!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Angle-Sorter/" rel="noopener">Source</a></div><div class="note">Pupils can sort angles by acute, right and obtuse angles for quick recap. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Space Parallel and Perpendicular Lines Sorter!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Perpendicular-and-Parallel-Sorter/" rel="noopener">Source</a></div><div class="note">Pupils can sort parallel lines and perpendicular lines for quick recap. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 3D Math Racing Game!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-3D-Math-Racing-Game/" rel="noopener">Source</a></div><div class="note">Pupils can race, destroy aliens and solve Math questions. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 3D Fencing Game!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Math-Fencing-Game/" rel="noopener">Source</a></div><div class="note">Pupils can fence to solve Math questions. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Multiple River Crossing Game!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Multiples-Frog-Crossing-River/" rel="noopener">Source</a></div><div class="note">Pupils can cross the road to solve Math questions. Website is embeddable in SLS.</div></article>
+        <article class="card math"><p>P3 Fractions - Space Max and the Lost Rocket Parts!</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P2-P3-Space-Max-and-the-Lost-Fraction-Rocket-Parts/" rel="noopener">Source</a></div><div class="note">Pupils can solve Fraction questions and complete missions in space.</div></article>
+        <article class="card math"><p>P3 Fractions on Number Lines</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Fractions-on-Number-Lines/" rel="noopener">Source</a></div><div class="note">Pupils can solve Fraction on Number Lines questions with Fraction Bar and Discs to aid them.</div></article>
+        <article class="card math"><p>P3 Division Quest</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/P3-Division-Quest-The-Missing-Total/" rel="noopener">Source</a></div><div class="note">Pupils can find quotient and remainder given a story.</div></article>
+        <article class="card math"><h3>P3 Length, Mass and Volume Sports Fiesta</h3><p>Sports-themed practice for Primary 3 length, mass and volume.</p><div class="badges"><span class="badge math">P3 Math</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3-Length-Mass-and-Volume-Sports-Fiesta-/" target="_blank" rel="noopener">Open</a></div><div class="note">Practise length, mass and volume through sports-themed activities.</div></article>
+      </div>
     </section>
-    </article>
-          
 
-    <!-- ===================== ENGLISH ===================== -->
     <section id="english" class="section anchor">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title"><span class="dot english"></span> English</h2>
-          <p class="section-sub">Phonics, reading, spelling and language activities for differentiated learning.</p>
-        </div>
-        <div class="section-tag">English Programmes</div>
-      </div>
-
+      <div class="section-head"><div><h2 class="section-title"><span class="dot english"></span> English</h2><p class="section-sub">Phonics, reading, spelling and language activities for differentiated learning.</p></div><div class="section-tag">English Programmes</div></div>
       <div class="grid">
-        <article class="card english">
-          <h3>SDR Interactive Grid Chart</h3>
-          <p>SDR Interactive Grid Chart for students to learn phonics on the go. Good for differentiated instruction.</p>
-          <div class="badges">
-            <!-- FIXED: removed invalid <span class="badge.sdr"></span> -->
-            <span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789864?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-         <article class="card english">
-          <h3>SDR P3 One Minute Dash</h3>
-          <p>SDR One Minute Dash for Phonograms and HFW!</p>
-          <div class="badges">
-            <span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/SDR_One_Minute_Dash/" target="_blank" rel="noopener">Website</a>
-            </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-        <article class="card english">
-          <h3>SDR Sound Garden</h3>
-          <p>SDR Sound Garden for differentiated instruction.</p>
-          <div class="badges">
-            <span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789865" target="_blank" rel="noopener">Link to SLS lesson</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-
-         <article class="card english">
-          <h3>P3 SDR One Stop Hub-Everything You Need for P3 SDR!</h3>
-          <p>P3 SDR One Stop Hub for Differentiated Instruction.</p>
-          <div class="badges">
-            <span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3-SDR-One-Stop-Hub/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">This link is ready to embed in SLS.</div>
-        </article>
-
-        <article class="card english">
-          <h3>Phonograms Toy Castle Game</h3>
-          <p>Practise phonograms through a colourful one- or two-player toy castle game.</p>
-          <div class="badges">
-            <span class="badge english">English</span><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Phonograms-Toy-Castle-Game/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">Build phonogram recognition through engaging game play.</div>
-        </article>
-
-        <article class="card english">
-          <h3>Teaching of Spelling for SDR 2.0, M-G-I, or Customise Your Own!</h3>
-          <p>Teach SDR spelling using pre-programmed words or customise your own spelling word lists.</p>
-          <div class="badges">
-            <span class="badge english">English</span><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Open</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/6428fcb2-5687-414d-8abd-dad2aa4f53d4/section/98733397/activity/98733398?pageNo=1" target="_blank" rel="noopener">Link to SLS</a>
-          </div>
-          <div class="note">Teachers can load the pre-programmed words or customise their own spelling word lists.</div>
-        </article>
-
-        <article class="card english">
-          <h3>English Word Order and Matching</h3>
-          <p>Create interactive word-order and matching activities for English lessons.</p>
-          <div class="badges">
-            <span class="badge english">English</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/English-Word-Order-and-Matching/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">Teachers can customise the content for word-order and matching practice.</div>
-        </article>
-
-        <article class="card english">
-          <h3>P1 to P3 Spelling Number Words Tug of War</h3>
-          <p>A tug-of-war game for learning and practising the spelling of number words.</p>
-          <div class="badges">
-            <span class="badge english">English</span><span class="badge math">Math</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1-to-P3-Spelling-Number-Words-Tug-of-War/" target="_blank" rel="noopener">Open</a>
-          </div>
-          <div class="note">Practise number-word spelling through a fun game.</div>
-        </article>
+        <article class="card english"><h3>SDR Interactive Grid Chart</h3><p>SDR Interactive Grid Chart for students to learn phonics on the go. Good for differentiated instruction.</p><div class="badges"><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/Sound_Grid_Landing_Page/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789864?pageNo=1" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card english"><h3>SDR P3 One Minute Dash</h3><p>SDR One Minute Dash for Phonograms and HFW!</p><div class="badges"><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/SDR_One_Minute_Dash/" target="_blank" rel="noopener">Website</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card english"><h3>SDR Sound Garden</h3><p>SDR Sound Garden for differentiated instruction.</p><div class="badges"><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/Sound_Garden_Landing_Page/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/79c86650-4ef8-44a0-919d-dd51c2ef7207/section/97789863/activity/97789865" target="_blank" rel="noopener">Link to SLS lesson</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card english"><h3>P3 SDR One Stop Hub-Everything You Need for P3 SDR!</h3><p>P3 SDR One Stop Hub for Differentiated Instruction.</p><div class="badges"><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3-SDR-One-Stop-Hub/" target="_blank" rel="noopener">Open</a></div><div class="note">This link is ready to embed in SLS.</div></article>
+        <article class="card english"><h3>Phonograms Toy Castle Game</h3><p>Practise phonograms through a colourful one- or two-player toy castle game.</p><div class="badges"><span class="badge english">English</span><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Phonograms-Toy-Castle-Game/" target="_blank" rel="noopener">Open</a></div><div class="note">Build phonogram recognition through engaging game play.</div></article>
+        <article class="card english"><h3>Spelling Game</h3><p>Complete spelling missions and practise a wide range of phonograms in 1-player or 2-player mode.</p><div class="badges"><span class="badge english">English</span><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Spelling-Game/" target="_blank" rel="noopener">Open</a></div><div class="note">Practise spelling and phonogram recognition through game play.</div></article>
+        <article class="card english"><h3>Teaching of Spelling for SDR 2.0, M-G-I, or Customise Your Own!</h3><p>Teach SDR spelling using pre-programmed words or customise your own spelling word lists.</p><div class="badges"><span class="badge english">English</span><span class="badge sdr">SDR</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_SDR_Spelling/" target="_blank" rel="noopener">Open</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/6428fcb2-5687-414d-8abd-dad2aa4f53d4/section/98733397/activity/98733398?pageNo=1" target="_blank" rel="noopener">Link to SLS</a></div><div class="note">Teachers can load the pre-programmed words or customise their own spelling word lists.</div></article>
+        <article class="card english"><h3>English Word Order and Matching</h3><p>Create interactive word-order and matching activities for English lessons.</p><div class="badges"><span class="badge english">English</span><span class="badge">Primary</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/English-Word-Order-and-Matching/" target="_blank" rel="noopener">Open</a></div><div class="note">Teachers can customise the content for word-order and matching practice.</div></article>
+        <article class="card english"><h3>P1 to P3 Spelling Number Words Tug of War</h3><p>A tug-of-war game for learning and practising the spelling of number words.</p><div class="badges"><span class="badge english">English</span><span class="badge math">Math</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1-to-P3-Spelling-Number-Words-Tug-of-War/" target="_blank" rel="noopener">Open</a></div><div class="note">Practise number-word spelling through a fun game.</div></article>
       </div>
     </section>
 
-    <!-- ===================== SPANNING ACROSS LEVELS ===================== -->
     <section id="tools" class="section anchor">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title"><span class="dot tool"></span> General Tools • Teaching &amp; Productivity</h2>
-          <p class="section-sub">Utilities that support SLS packaging, lesson prep, and classroom demos.</p>
-        </div>
-        <div class="section-tag">Sorted: Level → Subject</div>
-      </div>
-
+      <div class="section-head"><div><h2 class="section-title"><span class="dot tool"></span> General Tools • Teaching &amp; Productivity</h2><p class="section-sub">Utilities that support SLS packaging, lesson prep, and classroom demos.</p></div><div class="section-tag">Sorted: Level → Subject</div></div>
       <div class="grid">
-        <article class="card tool">
-          <h3>Scorable HTML with Feedback Compiler</h3>
-          <p>Scorable HTML with feedback compiler (Practice+Test or Test-only). Easy ZIP by pasting HTML and pressing a button.</p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">General</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Source</a>
-          </div>
-          <div class="note">Teachers can create HTML5 with Practice + Test structure or Test Only structure.</div>
-        </article>
-
-        <article class="card tool">
-          <h3>Place Value Chart for Counting — Good for all levels!</h3>
-          <p>Use base ten blocks, place value discs and place value cards to show a number, up to 10 million.</p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P6</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/b9667e69-ad15-4911-b64c-89e6074c634a/section/98733883/activity/98733884?pageNo=1" target="_blank" rel="noopener">Link to SLS</a>
-          </div>
-          <div class="note">Teachers can use base ten blocks, place value discs and place value cards to show a number, up to 10 million.</div>
-        </article>
-
-        <article class="card tool">
-          <h3>P1 to P4 Math - Comparing and Ordering Numbers </h3>
-          <p>Compare using base ten blocks, place value discs and place value cards for teaching and learning.</p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P4</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1-to-P4-Comparing-and-Ordering-Numbers/" target="_blank" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P1-to-P4-Comparing-and-Ordering-Numbers/" target="_blank" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/314c2f5a-24f5-4e1a-8b54-9de25e2d4222/section/99075141/activity/99075142?pageNo=1" target="_blank" rel="noopener">Link to SLS</a>
-          </div>
-          <div class="note">Compare using base ten blocks, place value discs and place value cards for teaching and learning.</div>
-        </article>
-        <article class="card tool">
-          <h3>P1 to P3 Math- Addition and Subtraction </h3>
-          <p>Addition and Subtraction using base ten blocks and place value discs for teaching and learning.</p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P4</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1_to_P3_Addition_and_Subtraction/" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Addition_and_Subtraction/" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/c5404143-2a32-4ea8-83ea-546b516e12bd/section/99154481/activity/99154482?pageNo=1" target="_blank" rel="noopener">Link to SLS</a>
-          </div>
-          <div class="note">Compare using base ten blocks, place value discs and place value cards for teaching and learning.</div>
-        </article>
-        </article>
-        <article class="card tool">
-          <h3>P1 to P3 Math- Comparing and Ordering Using a Number Line </h3>
-          <p>Comparing and Ordering using a Number Line for teaching and learning.</p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P4</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P1_to_P3_Comparing_and_Ordering_Number_Using_a_Number_Line/" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Comparing_and_Ordering_Number_Using_a_Number_Line/" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/d4e95a18-229c-4345-a546-f81e717d59f7" target="_blank" rel="noopener">Link to SLS</a>
-          </div>
-          <div class="note">Compare and Order using number line for teaching and learning.</div>
-        </article>
-        <article class="card tool">
-          <h3>P1 to P3 Math- Forming Greatest or Smallest, Odd or Even number </h3>
-          <p>P1 to P3 Math- Forming Greatest or Smallest, Odd or Even number </p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/forming_even_or_odd_greatest_or_smallest_digit-/" rel="noopener">Open</a>
-            <a class="btn" href="https://limkimsze-maker.github.io/forming_even_or_odd_greatest_or_smallest_digit-/" rel="noopener">Source</a>
-            <a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/15603d16-27b3-47b5-813b-2db2fae0a44c" target="_blank" rel="noopener">Link to SLS</a>
-          </div>
-          <div class="note">Compare and Order using number line for teaching and learning.</div>
-        </article>
-        <article class="card tool">
-          <h3>P1 to P3 Multiply Flyer </h3>
-          <p>P1 to P3 Multiply Flyer - Flying through the Timetable Forest! </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/Multiply-Flyer/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Fun game to learn timetables</div>
-        </article>
-        <article class="card tool">
-          <h3>Times Racer </h3>
-          <p>Times Racer - Dashing through! </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/Times-Racer/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Fun game to learn timetables</div>
-      </article>
-      <article class="card tool">
-          <h3>Divide Racer</h3>
-          <p>Divide Racer - Divide and Conquer! </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/Divide-Racer/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Fun game to learn dividing!</div>
-        </article>
-        <article class="card tool">
-          <h3>Addition Racer</h3>
-          <p>Addition Racer - Adding all up! </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/Addition-Racer/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Fun game to learn addition!</div>
-        </article>
-        <article class="card tool">
-          <h3>Subtraction Racer</h3>
-          <p>Subtraction Racer - Finding the difference! </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/Subtraction-Racer/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Fun game to learn subtraction!</div>
-        </article>
-        
-        <article class="card tool">
-          <h3>Multiply Space Commander</h3>
-          <p>Multiply Space Commander - Finding the product! </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/Multiply-Space-Commander/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Fun shooting game to learn multiplication!</div>
-        </article>
-
-        <article class="card tool">
-          <h3>Multiply Space Commander 1 Times table to 12 Times table</h3>
-          <p>Multiply Space Commander - Finding the product level by level! </p>
-          <div class="badges">
-            <span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn" href="https://limkimsze-maker.github.io/Multiply-Space-Commander-Level-by-Level/" rel="noopener">Source</a>
-          </div>
-          <div class="note">Fun shooting game to learn multiplication level by level!</div>
-        </article>
-
-        <article class="card tool">
-          <h3>P3 Math Topics</h3>
-          <p>P3 Math Topics </p>
-          <div class="badges">
-            <span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span>
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="https://limkimsze-maker.github.io/P3_Math_Topics/" rel="noopener">Open</a>
-          </div>
-          <div class="note">P3 Math Topics.</div>
-        </article>
-              </div>
+        <article class="card tool"><h3>Scorable HTML with Feedback Compiler</h3><p>Scorable HTML with feedback compiler (Practice+Test or Test-only). Easy ZIP by pasting HTML and pressing a button.</p><div class="badges"><span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">General</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">Source</a></div><div class="note">Teachers can create HTML5 with Practice + Test structure or Test Only structure.</div></article>
+        <article class="card tool"><h3>Place Value Chart for Counting — Good for all levels!</h3><p>Use base ten blocks, place value discs and place value cards to show a number, up to 10 million.</p><div class="badges"><span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P6</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/Place-Value-Chart-for-Counting/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/b9667e69-ad15-4911-b64c-89e6074c634a/section/98733883/activity/98733884?pageNo=1" target="_blank" rel="noopener">Link to SLS</a></div><div class="note">Teachers can use base ten blocks, place value discs and place value cards to show a number, up to 10 million.</div></article>
+        <article class="card tool"><h3>P1 to P4 Math - Comparing and Ordering Numbers</h3><p>Compare using base ten blocks, place value discs and place value cards for teaching and learning.</p><div class="badges"><span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P4</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1-to-P4-Comparing-and-Ordering-Numbers/" target="_blank" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P1-to-P4-Comparing-and-Ordering-Numbers/" target="_blank" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/314c2f5a-24f5-4e1a-8b54-9de25e2d4222/section/99075141/activity/99075142?pageNo=1" target="_blank" rel="noopener">Link to SLS</a></div><div class="note">Compare using base ten blocks, place value discs and place value cards for teaching and learning.</div></article>
+        <article class="card tool"><h3>P1 to P3 Math- Addition and Subtraction</h3><p>Addition and Subtraction using base ten blocks and place value discs for teaching and learning.</p><div class="badges"><span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P4</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1_to_P3_Addition_and_Subtraction/" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Addition_and_Subtraction/" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/c5404143-2a32-4ea8-83ea-546b516e12bd/section/99154481/activity/99154482?pageNo=1" target="_blank" rel="noopener">Link to SLS</a></div><div class="note">Compare using base ten blocks, place value discs and place value cards for teaching and learning.</div></article>
+        <article class="card tool"><h3>P1 to P3 Math- Comparing and Ordering Using a Number Line</h3><p>Comparing and Ordering using a Number Line for teaching and learning.</p><div class="badges"><span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P4</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1_to_P3_Comparing_and_Ordering_Number_Using_a_Number_Line/" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/P1_to_P3_Comparing_and_Ordering_Number_Using_a_Number_Line/" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/d4e95a18-229c-4345-a546-f81e717d59f7" target="_blank" rel="noopener">Link to SLS</a></div><div class="note">Compare and Order using number line for teaching and learning.</div></article>
+        <article class="card tool"><h3>P1 to P3 Math- Forming Greatest or Smallest, Odd or Even number</h3><p>P1 to P3 Math- Forming Greatest or Smallest, Odd or Even number</p><div class="badges"><span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/forming_even_or_odd_greatest_or_smallest_digit-/" rel="noopener">Open</a><a class="btn" href="https://limkimsze-maker.github.io/forming_even_or_odd_greatest_or_smallest_digit-/" rel="noopener">Source</a><a class="pill-sls" href="https://vle.learning.moe.edu.sg/community-gallery/module/view/15603d16-27b3-47b5-813b-2db2fae0a44c" target="_blank" rel="noopener">Link to SLS</a></div><div class="note">Compare and Order using number line for teaching and learning.</div></article>
+        <article class="card tool"><h3>P1 to P3 Multiply Flyer</h3><p>P1 to P3 Multiply Flyer - Flying through the Timetable Forest!</p><div class="badges"><span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Multiply-Flyer/" rel="noopener">Source</a></div><div class="note">Fun game to learn timetables</div></article>
+        <article class="card tool"><h3>Times Racer</h3><p>Times Racer - Dashing through!</p><div class="badges"><span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Times-Racer/" rel="noopener">Source</a></div><div class="note">Fun game to learn timetables</div></article>
+        <article class="card tool"><h3>Divide Racer</h3><p>Divide Racer - Divide and Conquer!</p><div class="badges"><span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Divide-Racer/" rel="noopener">Source</a></div><div class="note">Fun game to learn dividing!</div></article>
+        <article class="card tool"><h3>Addition Racer</h3><p>Addition Racer - Adding all up!</p><div class="badges"><span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Addition-Racer/" rel="noopener">Source</a></div><div class="note">Fun game to learn addition!</div></article>
+        <article class="card tool"><h3>Subtraction Racer</h3><p>Subtraction Racer - Finding the difference!</p><div class="badges"><span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Subtraction-Racer/" rel="noopener">Source</a></div><div class="note">Fun game to learn subtraction!</div></article>
+        <article class="card tool"><h3>Multiply Space Commander</h3><p>Multiply Space Commander - Finding the product!</p><div class="badges"><span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Multiply-Space-Commander/" rel="noopener">Source</a></div><div class="note">Fun shooting game to learn multiplication!</div></article>
+        <article class="card tool"><h3>Multiply Space Commander 1 Times table to 12 Times table</h3><p>Multiply Space Commander - Finding the product level by level!</p><div class="badges"><span class="badge tool">Game</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn" href="https://limkimsze-maker.github.io/Multiply-Space-Commander-Level-by-Level/" rel="noopener">Source</a></div><div class="note">Fun shooting game to learn multiplication level by level!</div></article>
+        <article class="card tool"><h3>P3 Math Topics</h3><p>P3 Math Topics</p><div class="badges"><span class="badge tool">Teaching Resources &amp; Productivity</span><span class="badge">P1 to P3</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P3_Math_Topics/" rel="noopener">Open</a></div><div class="note">P3 Math Topics.</div></article>
+      </div>
     </section>
-
   </main>
 
   <footer>
     Designed by Lim Kim Sze © 2025 • CC BY-NC-ND 4.0 • Gallery is SLS-embed friendly.
-    <a href="https://hits.sh/limkimsze-maker.github.io/">
-      <img alt="Hits" src="https://hits.sh/limkimsze-maker.github.io.svg?style=for-the-badge&label=Views&color=007ec6" />
-    </a>
+    <a href="https://hits.sh/limkimsze-maker.github.io/"><img alt="Hits" src="https://hits.sh/limkimsze-maker.github.io.svg?style=for-the-badge&label=Views&color=007ec6" /></a>
   </footer>
 
   <script>
-    // Matrix-style code rain with ON/OFF terminal toggle (default ON, remembers choice)
     (function(){
       const c = document.getElementById('rain');
       const btn = document.getElementById('rainToggle');
       if (!c || !btn) return;
-
       const labelEl = btn.querySelector('.label');
       const ctx = c.getContext('2d', { alpha:true });
-
-      const glyphs = (
-        "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン" +
-        "0123456789" +
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-        "abcdefghijklmnopqrstuvwxyz"
-      ).split("");
-
-      let w=0, h=0, cols=0, drops=[];
-      let rafId = 0;
-      let running = false;
-
+      const glyphs = ("アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"+"0123456789"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"abcdefghijklmnopqrstuvwxyz").split("");
+      let w=0,h=0,cols=0,drops=[];
+      let rafId=0;
+      let running=false;
       function resize(){
-        const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-        w = Math.floor(window.innerWidth);
-        h = Math.floor(window.innerHeight);
-        c.width = Math.floor(w * dpr);
-        c.height = Math.floor(h * dpr);
-        c.style.width = w + "px";
-        c.style.height = h + "px";
-        ctx.setTransform(dpr,0,0,dpr,0,0);
-
-        const fontSize = 16;
-        cols = Math.max(1, Math.floor(w / fontSize));
-        drops = Array.from({length: cols}, () => Math.random() * h / fontSize);
-
-        ctx.font = "700 16px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
-        ctx.textBaseline = "top";
+        const dpr=Math.max(1,Math.min(2,window.devicePixelRatio||1));
+        w=Math.floor(window.innerWidth);h=Math.floor(window.innerHeight);
+        c.width=Math.floor(w*dpr);c.height=Math.floor(h*dpr);c.style.width=w+"px";c.style.height=h+"px";ctx.setTransform(dpr,0,0,dpr,0,0);
+        const fontSize=16;cols=Math.max(1,Math.floor(w/fontSize));drops=Array.from({length:cols},()=>Math.random()*h/fontSize);
+        ctx.font="700 16px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";ctx.textBaseline="top";
       }
-
-      function clearCanvas(){ ctx.clearRect(0,0,w,h); }
-
+      function clearCanvas(){ctx.clearRect(0,0,w,h)}
       let last=0;
       function frame(t){
-        if (!running) return;
-
-        // cap to ~40fps for battery friendliness
-        if (t - last < 25) { rafId = requestAnimationFrame(frame); return; }
-        last = t;
-
-        // fade
-        ctx.fillStyle = "rgba(2, 6, 10, 0.12)";
-        ctx.fillRect(0,0,w,h);
-
-        const fontSize = 16;
-        for (let i=0; i<cols; i++){
-          const x = i * fontSize;
-          const y = drops[i] * fontSize;
-
-          const ch = glyphs[(Math.random()*glyphs.length)|0];
-
-          // green with occasional blue highlight
-          ctx.fillStyle = (Math.random() < 0.03)
-            ? "rgba(0, 229, 255, .55)"
-            : "rgba(34, 255, 143, .75)";
-
-          ctx.fillText(ch, x, y);
-
-          if (y > h && Math.random() > 0.975) drops[i] = 0;
-          drops[i] += 0.85 + Math.random()*0.75;
+        if(!running)return;
+        if(t-last<25){rafId=requestAnimationFrame(frame);return}last=t;
+        ctx.fillStyle="rgba(2, 6, 10, 0.12)";ctx.fillRect(0,0,w,h);
+        const fontSize=16;
+        for(let i=0;i<cols;i++){
+          const x=i*fontSize;const y=drops[i]*fontSize;const ch=glyphs[(Math.random()*glyphs.length)|0];
+          ctx.fillStyle=(Math.random()<0.03)?"rgba(0, 229, 255, .55)":"rgba(34, 255, 143, .75)";
+          ctx.fillText(ch,x,y);if(y>h&&Math.random()>0.975)drops[i]=0;drops[i]+=0.85+Math.random()*0.75;
         }
-
-        rafId = requestAnimationFrame(frame);
+        rafId=requestAnimationFrame(frame);
       }
-
-      function setButtonState(on){
-        btn.classList.toggle('off', !on);
-        btn.setAttribute('aria-pressed', String(on));
-        if (labelEl) labelEl.textContent = on ? 'RAIN::TRUE' : 'RAIN::FALSE';
-      }
-
-      function start(){
-        if (running) return;
-        c.style.display = "block";
-        resize();
-        running = true;
-        rafId = requestAnimationFrame(frame);
-      }
-
-      function stop(){
-        running = false;
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = 0;
-        c.style.display = "none";
-        clearCanvas();
-      }
-
-      function setEnabled(on){
-        localStorage.setItem('matrixRainEnabled', on ? '1' : '0');
-        if (on) start(); else stop();
-        setButtonState(on);
-      }
-
-      // Default ON unless user previously turned it OFF
-      const saved = localStorage.getItem('matrixRainEnabled');
-      const enabled = (saved === null) ? true : (saved === '1');
-
-      btn.addEventListener('click', () => setEnabled(!running));
-      window.addEventListener('resize', () => { if (running) resize(); }, {passive:true});
-
-      setButtonState(enabled);
-      if (enabled) start(); else stop();
+      function setButtonState(on){btn.classList.toggle('off',!on);btn.setAttribute('aria-pressed',String(on));if(labelEl)labelEl.textContent=on?'RAIN::TRUE':'RAIN::FALSE'}
+      function start(){if(running)return;c.style.display="block";resize();running=true;rafId=requestAnimationFrame(frame)}
+      function stop(){running=false;if(rafId)cancelAnimationFrame(rafId);rafId=0;c.style.display="none";clearCanvas()}
+      function setEnabled(on){localStorage.setItem('matrixRainEnabled',on?'1':'0');if(on)start();else stop();setButtonState(on)}
+      const saved=localStorage.getItem('matrixRainEnabled');const enabled=(saved===null)?true:(saved==='1');
+      btn.addEventListener('click',()=>setEnabled(!running));window.addEventListener('resize',()=>{if(running)resize()},{passive:true});setButtonState(enabled);if(enabled)start();else stop();
     })();
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
