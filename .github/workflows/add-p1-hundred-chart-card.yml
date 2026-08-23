@@ -1,5 +1,6 @@
 name: Add P1 Hundred Chart card
 # Trigger after workflow exists on main
+# Merge this branch to run the gallery patch
 
 on:
   push:
