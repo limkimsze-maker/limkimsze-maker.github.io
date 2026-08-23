@@ -1,0 +1,55 @@
+name: Add P1 Hundred Chart card
+
+on:
+  push:
+    paths:
+      - .github/workflows/add-p1-hundred-chart-card.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add resource under Primary 1
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+          target_url = "https://limkimsze-maker.github.io/P1-Hundred-Chart-and-Flip-Chart-More-Than-Less-Than/"
+
+          if target_url not in html:
+              section_start = html.find('<section id="p1-math"')
+              section_end = html.find('</section>', section_start)
+              if section_start == -1 or section_end == -1:
+                  raise SystemExit("Primary 1 section not found")
+
+              grid_marker = '<div class="grid">'
+              grid_pos = html.find(grid_marker, section_start, section_end)
+              if grid_pos == -1:
+                  raise SystemExit("Primary 1 grid not found")
+
+              insert_pos = grid_pos + len(grid_marker)
+              card = '''
+        <article class="card math"><h3>P1 Hundred Chart &amp; Number Flipchart</h3><p>Teach 1 more, 10 more, 1 less and 10 less within 100 by connecting movement on a hundred chart with place value on a number flipchart.</p><div class="badges"><span class="badge math">P1 Math</span><span class="badge">Numbers to 100</span><span class="badge ready">SLS-ready</span></div><div class="actions"><a class="btn primary" href="https://limkimsze-maker.github.io/P1-Hundred-Chart-and-Flip-Chart-More-Than-Less-Than/" target="_blank" rel="noopener">Open</a></div><div class="note">Use after hands-on and physical representations to consolidate the connection between the hundred chart, place value and numerals.</div></article>'''
+              html = html[:insert_pos] + card + html[insert_pos:]
+              path.write_text(html, encoding="utf-8")
+
+      - name: Remove temporary workflow and commit
+        run: |
+          rm -f .github/workflows/add-p1-hundred-chart-card.yml
+          if git diff --quiet; then
+            echo "No changes needed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/add-p1-hundred-chart-card.yml
+          git commit -m "Add P1 Hundred Chart and Number Flipchart to gallery"
+          git push
