@@ -89,6 +89,71 @@
     header p{margin:0;color:rgba(143,255,200,.85)}
     .wrap{max-width:1150px;margin:0 auto;padding:14px 16px 28px; position:relative; z-index:1}
 
+    .featured-engine-group{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      margin:22px auto 18px;
+    }
+    .featured-engine-group h2{
+      margin:0;
+      font-size:clamp(1rem,2vw,1.25rem);
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      color:#ffe79a;
+      text-shadow:0 0 12px rgba(245,158,11,.65);
+    }
+    .featured-engine-square{
+      width:min(230px,72vw);
+      aspect-ratio:1/1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      padding:22px;
+      text-align:center;
+      text-decoration:none;
+      color:#342400;
+      border:2px solid #ffe28a;
+      border-radius:24px;
+      background:
+        radial-gradient(circle at 35% 24%,rgba(255,255,255,.85),transparent 26%),
+        linear-gradient(145deg,#fff4b8 0%,#ffd95f 48%,#e7a817 100%);
+      box-shadow:0 0 14px rgba(255,231,154,.95),0 0 34px rgba(245,158,11,.82),0 0 66px rgba(245,158,11,.42),0 22px 40px rgba(0,0,0,.40);
+      position:relative;
+      overflow:hidden;
+      animation:engineSquareGlow 1.8s ease-in-out infinite alternate;
+      transition:transform .14s ease,filter .14s ease,box-shadow .14s ease;
+    }
+    .featured-engine-square::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(125deg,transparent 18%,rgba(255,255,255,.42) 42%,transparent 63%);
+      transform:translateX(-115%);
+      animation:engineShine 3.6s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .featured-engine-square:hover{
+      transform:translateY(-4px) scale(1.025);
+      filter:saturate(1.08) brightness(1.04);
+      box-shadow:0 0 18px rgba(255,244,195,1),0 0 42px rgba(245,158,11,.95),0 0 78px rgba(245,158,11,.56),0 28px 48px rgba(0,0,0,.46);
+    }
+    .featured-engine-square .engine-kicker{font-size:.78rem;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;opacity:.78}
+    .featured-engine-square .engine-title{font-size:1.35rem;line-height:1.18;font-weight:900}
+    .featured-engine-square .engine-level{padding:6px 10px;border-radius:999px;border:1px solid rgba(126,77,0,.32);background:rgba(255,255,255,.38);font-size:.8rem;font-weight:900}
+    .featured-engine-square .engine-open{font-size:.8rem;font-weight:900;letter-spacing:.3px}
+    @keyframes engineSquareGlow{
+      from{box-shadow:0 0 12px rgba(255,231,154,.78),0 0 28px rgba(245,158,11,.62),0 0 52px rgba(245,158,11,.30),0 20px 38px rgba(0,0,0,.38)}
+      to{box-shadow:0 0 18px rgba(255,244,195,1),0 0 40px rgba(245,158,11,.92),0 0 72px rgba(245,158,11,.50),0 24px 44px rgba(0,0,0,.44)}
+    }
+    @keyframes engineShine{
+      0%,58%{transform:translateX(-115%)}
+      82%,100%{transform:translateX(115%)}
+    }
+
     .jump{
       display:flex; flex-wrap:wrap; gap:10px;
       justify-content:center;
@@ -243,6 +308,15 @@
   <header>
     <h1>Lim Kim Sze — Interactive Tools</h1>
     <p>A gallery of my interactive teaching tools.</p>
+    <section class="featured-engine-group" aria-labelledby="featuredEngineHeading">
+      <h2 id="featuredEngineHeading">Featured Teaching Engine</h2>
+      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Primary-Math-Teaching-Engine/" target="_blank" rel="noopener">
+        <span class="engine-kicker">Interactive Mathematics</span>
+        <span class="engine-title">Primary Math<br>Teaching Engine</span>
+        <span class="engine-level">P1 to P3</span>
+        <span class="engine-open">Open Teaching Engine ↗</span>
+      </a>
+    </section>
     <nav class="jump" aria-label="Jump to sections">
       <a class="chip" href="#p1-math"><span class="dot math"></span> P1 Math</a>
       <a class="chip" href="#p2-math"><span class="dot math"></span> P2 Math</a>
