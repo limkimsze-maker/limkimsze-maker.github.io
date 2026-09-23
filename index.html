@@ -120,6 +120,24 @@
       box-shadow:0 18px 28px rgba(0,0,0,.40);
       filter:saturate(1.12);
     }
+    .chip.engine-feature{
+      position:relative;
+      border:2px solid #ffd86a;
+      background:linear-gradient(180deg,#fff8d8 0%,#ffd65c 52%,#e8a916 100%);
+      color:#332400;
+      box-shadow:0 0 10px rgba(255,216,106,.95),0 0 24px rgba(245,158,11,.72),0 0 42px rgba(245,158,11,.38),0 10px 24px rgba(0,0,0,.30);
+      animation:engineGlow 1.8s ease-in-out infinite alternate;
+    }
+    .chip.engine-feature:hover{
+      transform:translateY(-2px) scale(1.02);
+      box-shadow:0 0 14px rgba(255,239,166,1),0 0 32px rgba(245,158,11,.92),0 0 54px rgba(245,158,11,.52),0 18px 30px rgba(0,0,0,.42);
+      filter:saturate(1.08) brightness(1.04);
+    }
+    .dot.engine{background:radial-gradient(circle at 35% 30%,#fff7bd 0 22%,#ffd24d 38%,#f59e0b 72%,#a95d00 100%);box-shadow:0 0 9px rgba(255,210,77,.95)}
+    @keyframes engineGlow{
+      from{box-shadow:0 0 8px rgba(255,216,106,.78),0 0 18px rgba(245,158,11,.52),0 0 34px rgba(245,158,11,.28),0 10px 24px rgba(0,0,0,.30)}
+      to{box-shadow:0 0 14px rgba(255,239,166,1),0 0 30px rgba(245,158,11,.88),0 0 50px rgba(245,158,11,.48),0 12px 26px rgba(0,0,0,.34)}
+    }
     .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
     .dot.math{background:linear-gradient(135deg, var(--neon), var(--neon2))}
     .dot.sdr,.dot.english{background:linear-gradient(135deg, #22ff8f, #10b981)}
@@ -208,7 +226,7 @@
     footer a{color:inherit}
     footer img{vertical-align:middle;margin-left:10px}
     .anchor{scroll-margin-top:18px}
-    @media (prefers-reduced-motion: reduce){.btn,.chip,.card,.toggle-terminal{transition:none}.cursor{animation:none}}
+    @media (prefers-reduced-motion: reduce){.btn,.chip,.card,.toggle-terminal{transition:none}.cursor,.chip.engine-feature{animation:none}}
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z848TQ1P2"></script>
@@ -229,6 +247,7 @@
       <a class="chip" href="#p1-math"><span class="dot math"></span> P1 Math</a>
       <a class="chip" href="#p2-math"><span class="dot math"></span> P2 Math</a>
       <a class="chip" href="#p3-math"><span class="dot math"></span> P3 Math</a>
+      <a class="chip engine-feature" href="https://limkimsze-maker.github.io/Primary-Math-Teaching-Engine/" target="_blank" rel="noopener"><span class="dot engine"></span> Primary Math Teaching Engine</a>
       <a class="chip" href="#english"><span class="dot english"></span> English</a>
       <a class="chip" href="#tools"><span class="dot tool"></span> General Tools</a>
       <button class="toggle-terminal" id="rainToggle" type="button" aria-pressed="true"><span class="label">RAIN::TRUE</span><span class="cursor" aria-hidden="true">_</span></button>
