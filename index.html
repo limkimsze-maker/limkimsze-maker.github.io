@@ -91,7 +91,7 @@
 
     .featured-engine-group{
       display:grid;
-      grid-template-columns:repeat(2,minmax(0,230px));
+      grid-template-columns:repeat(3,minmax(0,230px));
       justify-content:center;
       align-items:stretch;
       gap:12px;
@@ -294,7 +294,13 @@
     footer a{color:inherit}
     footer img{vertical-align:middle;margin-left:10px}
     .anchor{scroll-margin-top:18px}
-    @media (prefers-reduced-motion: reduce){.btn,.chip,.card,.toggle-terminal,.featured-engine-square{transition:none}.cursor,.chip.engine-feature,.featured-engine-square,.featured-engine-square::before{animation:none}}
+    @media (max-width:780px){
+      .featured-engine-group{grid-template-columns:repeat(2,minmax(0,230px))}
+    }
+    @media (max-width:520px){
+      .featured-engine-group{grid-template-columns:minmax(0,230px)}
+    }
+        @media (prefers-reduced-motion: reduce){.btn,.chip,.card,.toggle-terminal,.featured-engine-square{transition:none}.cursor,.chip.engine-feature,.featured-engine-square,.featured-engine-square::before{animation:none}}
   </style>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6Z848TQ1P2"></script>
@@ -324,6 +330,12 @@
         <span class="engine-title">Primary Math<br>Teaching Engine</span>
         <span class="engine-level">P1 to P3</span>
         <span class="engine-open">Open Teaching Engine ↗</span>
+      </a>
+      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Compiler/" target="_blank" rel="noopener">
+        <span class="engine-kicker">SLS HTML5 Authoring</span>
+        <span class="engine-title">Scorable HTML<br>Feedback Compiler</span>
+        <span class="engine-level">Teaching Tool</span>
+        <span class="engine-open">Open Compiler ↗</span>
       </a>
     </section>
     <nav class="jump" aria-label="Jump to sections">
