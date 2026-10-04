@@ -4,7 +4,7 @@ layout: null
 {% capture original %}{% include_relative index-original.html %}{% endcapture %}
 {% assign page = original | replace: '<a class="chip" href="https://limkimsze-maker.github.io/Classroom-Companion/teacher-bookmark.html" target="_blank" rel="noopener"><span class="dot tool"></span> Classroom Companion</a>', '' %}
 {% assign page = page | replace: 'grid-template-columns:repeat(4,minmax(0,230px));', 'grid-template-columns:repeat(5,minmax(0,205px));' %}
-{% capture five_col_css %}<style>@media (min-width:1100px){.featured-engine-group{grid-template-columns:repeat(5,minmax(0,205px))!important;}}</style></head>{% endcapture %}
+{% capture five_col_css %}<style>@media (min-width:1100px){.featured-engine-group{grid-template-columns:repeat(5,minmax(0,205px))!important}.featured-engine-square{padding:12px!important;gap:7px!important}.featured-engine-square .engine-kicker{font-size:.68rem!important;line-height:1.15!important;letter-spacing:1px!important}.featured-engine-square .engine-title{font-size:1.12rem!important;line-height:1.14!important}.featured-engine-square .engine-level{padding:5px 9px!important;font-size:.72rem!important;line-height:1.1!important}.featured-engine-square .engine-open{font-size:.72rem!important;line-height:1.15!important}}</style></head>{% endcapture %}
 {% assign page = page | replace: '</head>', five_col_css %}
 {% capture arena %}      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Math-Fluency-Arena/" target="_blank" rel="noopener">
         <span class="engine-kicker">Interactive Mathematics Game</span>
