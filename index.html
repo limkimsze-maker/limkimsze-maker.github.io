@@ -2,4 +2,23 @@
 layout: null
 ---
 {% capture original %}{% include_relative index-original.html %}{% endcapture %}
-{{ original | replace: '<a class="chip" href="https://limkimsze-maker.github.io/Classroom-Companion/teacher-bookmark.html" target="_blank" rel="noopener"><span class="dot tool"></span> Classroom Companion</a>', '<a class="chip" style="width:110px;height:110px;min-width:110px;padding:10px;border-radius:18px;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.2;" href="https://limkimsze-maker.github.io/Classroom-Companion/teacher-bookmark.html" target="_blank" rel="noopener"><span class="dot tool"></span> Classroom Companion</a>' }}
+{% assign page = original | replace: '<a class="chip" href="https://limkimsze-maker.github.io/Classroom-Companion/teacher-bookmark.html" target="_blank" rel="noopener"><span class="dot tool"></span> Classroom Companion</a>', '' %}
+{% assign arena = '      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Math-Fluency-Arena/" target="_blank" rel="noopener">
+        <span class="engine-kicker">Interactive Mathematics Game</span>
+        <span class="engine-title">Math Fluency<br>Arena</span>
+        <span class="engine-level">Primary Math</span>
+        <span class="engine-open">Open Arena ↗</span>
+      </a>' %}
+{% capture arena_with_companion %}      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Math-Fluency-Arena/" target="_blank" rel="noopener">
+        <span class="engine-kicker">Interactive Mathematics Game</span>
+        <span class="engine-title">Math Fluency<br>Arena</span>
+        <span class="engine-level">Primary Math</span>
+        <span class="engine-open">Open Arena ↗</span>
+      </a>
+      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Classroom-Companion/teacher-bookmark.html" target="_blank" rel="noopener">
+        <span class="engine-kicker">Classroom Teaching Tool</span>
+        <span class="engine-title">Classroom<br>Companion</span>
+        <span class="engine-level">Teacher Tool</span>
+        <span class="engine-open">Open Companion ↗</span>
+      </a>{% endcapture %}
+{{ page | replace: arena, arena_with_companion }}
