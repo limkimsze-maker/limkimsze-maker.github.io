@@ -6,7 +6,12 @@ layout: null
 {% assign page = page | replace: 'grid-template-columns:repeat(4,minmax(0,230px));', 'grid-template-columns:repeat(5,minmax(0,205px));' %}
 {% capture five_col_css %}<style>@media (min-width:1100px){.featured-engine-group{grid-template-columns:repeat(5,minmax(0,205px))!important;}}</style></head>{% endcapture %}
 {% assign page = page | replace: '</head>', five_col_css %}
-{% assign arena = '      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Math-Fluency-Arena/" target="_blank" rel="noopener">\n        <span class="engine-kicker">Interactive Mathematics Game</span>\n        <span class="engine-title">Math Fluency<br>Arena</span>\n        <span class="engine-level">Primary Math</span>\n        <span class="engine-open">Open Arena ↗</span>\n      </a>' %}
+{% capture arena %}      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Math-Fluency-Arena/" target="_blank" rel="noopener">
+        <span class="engine-kicker">Interactive Mathematics Game</span>
+        <span class="engine-title">Math Fluency<br>Arena</span>
+        <span class="engine-level">Primary Math</span>
+        <span class="engine-open">Open Arena ↗</span>
+      </a>{% endcapture %}
 {% capture arena_with_companion %}      <a class="featured-engine-square" href="https://limkimsze-maker.github.io/Math-Fluency-Arena/" target="_blank" rel="noopener">
         <span class="engine-kicker">Interactive Mathematics Game</span>
         <span class="engine-title">Math Fluency<br>Arena</span>
