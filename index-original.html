@@ -80,6 +80,42 @@
       position:relative;
       z-index:1;
     }
+    .brand-heading{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:26px;
+      max-width:760px;
+      margin:0 auto 24px;
+      text-align:left;
+    }
+    .brand-emblem{
+      display:block;
+      width:164px;
+      height:auto;
+      flex:0 0 auto;
+      border:1px solid rgba(0,229,255,.25);
+      border-radius:18px;
+      box-shadow:0 0 30px rgba(0,229,255,.12),0 12px 32px rgba(0,0,0,.35);
+    }
+    .brand-copy{min-width:0}
+    .brand-name{
+      display:block;
+      margin-bottom:7px;
+      color:var(--ink2);
+      font-size:.48em;
+      font-weight:500;
+      letter-spacing:1.6px;
+    }
+    .brand-title{display:block}
+    @media(max-width:540px){
+      header{padding-top:22px}
+      .brand-heading{gap:15px;margin-bottom:20px}
+      .brand-emblem{width:96px;border-radius:12px}
+      .brand-copy h1{font-size:clamp(1.2rem,5.2vw,1.75rem);letter-spacing:0}
+      .brand-name{font-size:.59em;letter-spacing:.7px}
+      .brand-copy p{font-size:.78rem;line-height:1.5}
+    }
     header h1{
       margin:0 0 10px;
       font-size:clamp(1.55rem, 2.6vw, 2.35rem);
@@ -315,8 +351,13 @@
 <body>
   <canvas id="rain" aria-hidden="true"></canvas>
   <header>
-    <h1>Lim Kim Sze — Interactive Tools</h1>
-    <p>A gallery of my interactive teaching tools.</p>
+    <div class="brand-heading">
+      <img class="brand-emblem" src="assets/lim-kim-sze-emblem.webp" width="640" height="640" alt="" fetchpriority="high" decoding="async">
+      <div class="brand-copy">
+        <h1><span class="brand-name">Lim Kim Sze</span> <span class="brand-title">Interactive Tools</span></h1>
+        <p>A gallery of my interactive teaching tools.</p>
+      </div>
+    </div>
     <section class="featured-engine-group" aria-labelledby="featuredEngineHeading">
       <h2 id="featuredEngineHeading">Featured Teaching Tools</h2>
       <a class="featured-engine-square" href="https://limkimsze-maker.github.io/P3-SDR-One-Stop-Hub/" target="_blank" rel="noopener">
